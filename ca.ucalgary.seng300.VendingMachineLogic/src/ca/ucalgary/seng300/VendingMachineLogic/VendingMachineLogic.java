@@ -12,7 +12,7 @@ import java.util.List;
 import org.lsmr.vending.*;
 import org.lsmr.vending.hardware.*;
 
-public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener, PushButtonListener {
+public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener, PushButtonListener, IndicatorLightListener, DeliveryChuteListener {
 
 	private VendingMachine vm;
 	private int userCredit;
@@ -30,43 +30,48 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 		userCredit = 0;
 		//For loop to iterate through all the available buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
-				PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
-				sb.register(this); //And registers the relevant listeners
-				buttonList.add(sb); //Stores into an ArrayList for later use
+			PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
+			sb.register(this); //And registers the relevant listeners
+			buttonList.add(sb); //Stores into an ArrayList for later use
 		}
 		//Iterate through all available pop can racks
 		for (int i = 0; i < vm.getNumberOfPopCanRacks(); i++) {
-				PopCanRack pcr = vm.getPopCanRack(i); //Instantiates the hardware
-				pcr.register(this); //Registers the relevant listeners
+			PopCanRack pcr = vm.getPopCanRack(i); //Instantiates the hardware
+			pcr.register(this); //Registers the relevant listeners
 		}
 
 		vm.getCoinSlot().register(this);
 
 	}
-
+	
+	public void addCredit(int amount) {
+		userCredit += amount; 
+	}
+	
 	/**
 	 * @return the current event
 	 * Useful for printing things to a log file
 	 */
 	public String getEvent() {
-			return event;
+		return event;
 	}
+	
 	/**
 	 *
 	 * @return how much credit is in vending machine
 	 */
 	public int getCredit() {
-			return userCredit;
+		return userCredit;
 	}
-
+	
 	@Override
 	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
-		//Leave Empty
+		//TODO
 	}
 
 	@Override
 	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
-		//Leave Empty
+		//TODO
 	}
 
 	/*************************
@@ -84,17 +89,17 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 		int cost = vm.getPopKindCost(btnIndex);
 
 		if (cost > userCredit) { //Not enough money!!!
-			//Nothing happens for now
+			
 		} else {
 			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the pop rack
 			try {
-					pr.dispensePopCan(); //Dispenses the relevant pop
-					vm.getCoinReceptacle().storeCoins(); //Stores the change
-					userCredit -= cost; //Deduct the pay from the available credit
+				pr.dispensePopCan(); //Dispenses the relevant pop
+				vm.getCoinReceptacle().storeCoins(); //Stores the change
+				userCredit -= cost; //Deduct the pay from the available credit
 			} catch (DisabledException | CapacityExceededException e) {
-					throw new SimulationException(e);
+				throw new SimulationException(e);
 			} catch (EmptyException e2) {
-					event = "Pop is sold out!"; //Set the event for sold-out
+				event = "Pop is sold out!"; //Set the event for sold-out
 			}
 		}
 	}
@@ -131,13 +136,50 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 
 	@Override
 	public void validCoinInserted(CoinSlot slot, Coin coin) {
-		userCredit += coin.getValue(); //Increment the credit when valid coins are inserted
+		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
 		event = "Inserted $" + coin.getValue(); //Updates event
+		vm.getDisplay().display("Credit: " + userCredit); //Now displays the current credit
 	}
 
 	@Override
 	public void coinRejected(CoinSlot slot, Coin coin) {
 		event = "Invalid coin inserted";
+	}
+
+	@Override
+	public void activated(IndicatorLight light) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deactivated(IndicatorLight light) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void itemDelivered(DeliveryChute chute) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doorOpened(DeliveryChute chute) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doorClosed(DeliveryChute chute) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void chuteFull(DeliveryChute chute) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
