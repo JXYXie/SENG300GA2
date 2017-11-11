@@ -5,10 +5,11 @@ Repository for SENG 300 group assignment 2
 
 You must implement fully functional logic for the vending machine:
 
-* Customers must be able to press pop selection buttons and enter coins, in order to ultimately purchase pops.
+* ~~Customers must be able to press pop selection buttons and enter coins, in order to ultimately purchase pops.~~
 * ~~Again, Canadian coin denominations must be supported.~~
 * When the machine contains no credit for the user, a message "Hi there!" should be displayed for 5 seconds and then should be erased for 10 seconds, with this cycle repeating.
-* When the user enters valid coins, the message "Credit: " and the amount of credit should be displayed.
+* ~~When the user enters valid coins, the message "Credit: " and the amount of credit should be displayed.~~
+
 The machine should provide change once a pop is vended.  If the exact change can be provided, it should be, and the credit should go to zero.  If the exact change cannot be provided, the amount as close as possible to the exact change should be returned, but without going over; any remaining amount that cannot be returned should still exist as credit
 * Whenever exact change cannot be guaranteed for all possible transactions, the "exact change only" light should be turned on; otherwise, it should be off.
 * If the machine cannot store additional coins or otherwise becomes aware of a problem that cannot be recovered from (including being out of all pop), the "out of order" light should be turned on; if the safety is enabled, this light should also be turned on; otherwise, it should be turned off.
