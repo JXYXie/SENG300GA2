@@ -18,47 +18,47 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 	private int userCredit;
 	private List<PushButton> buttonList = new ArrayList<>();
 	private String event;
-	
+
 	/********************
 	 * Constructor
 	 * instantiates and initializes all the relevant hardware
 	 * and registers listeners
 	 *******************/
 	public VendingMachineLogic(VendingMachine vm) {
-		
+
 		this.vm = vm;
 		userCredit = 0;
 		//For loop to iterate through all the available buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
-			PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
-			sb.register(this); //And registers the relevant listeners
-			buttonList.add(sb); //Stores into an ArrayList for later use
+				PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
+				sb.register(this); //And registers the relevant listeners
+				buttonList.add(sb); //Stores into an ArrayList for later use
 		}
 		//Iterate through all available pop can racks
 		for (int i = 0; i < vm.getNumberOfPopCanRacks(); i++) {
-			PopCanRack pcr = vm.getPopCanRack(i); //Instantiates the hardware
-			pcr.register(this); //Registers the relevant listeners
+				PopCanRack pcr = vm.getPopCanRack(i); //Instantiates the hardware
+				pcr.register(this); //Registers the relevant listeners
 		}
-		
+
 		vm.getCoinSlot().register(this);
-				
+
 	}
-	
-	
+
 	/**
 	 * @return the current event
+	 * Useful for printing things to a log file
 	 */
 	public String getEvent() {
-		return event;
+			return event;
 	}
 	/**
-	 * 
+	 *
 	 * @return how much credit is in vending machine
 	 */
 	public int getCredit() {
-		return userCredit;
+			return userCredit;
 	}
-	
+
 	@Override
 	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
 		//Leave Empty
@@ -66,35 +66,35 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 
 	@Override
 	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
-		//Leave Empty		
+		//Leave Empty
 	}
-	
+
 	/*************************
 	 * Handles the logic of selection buttons
 	 *************************/
 	@Override
 	public void pressed(PushButton button) {
-		
+
 		int btnIndex = buttonList.indexOf(button) ; //Which button did the user press
-		
+
 		if (btnIndex == -1) { //Unregistered button is pressed
 			//Nothing happens for now
 		}
-		
+
 		int cost = vm.getPopKindCost(btnIndex);
-		
+
 		if (cost > userCredit) { //Not enough money!!!
 			//Nothing happens for now
 		} else {
 			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the pop rack
 			try {
-				pr.dispensePopCan(); //Dispenses the relevant pop
-				vm.getCoinReceptacle().storeCoins(); //Stores the change
-				userCredit -= cost; //Deduct the pay from the available credit
+					pr.dispensePopCan(); //Dispenses the relevant pop
+					vm.getCoinReceptacle().storeCoins(); //Stores the change
+					userCredit -= cost; //Deduct the pay from the available credit
 			} catch (DisabledException | CapacityExceededException e) {
-				throw new SimulationException(e);
+					throw new SimulationException(e);
 			} catch (EmptyException e2) {
-				event = "Pop is sold out!"; //Set the event for sold-out
+					event = "Pop is sold out!"; //Set the event for sold-out
 			}
 		}
 	}
@@ -118,21 +118,21 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 	public void popCansUnloaded(PopCanRack rack, PopCan... popCans) {
 		//Leave empty
 	}
-	
+
 	@Override
 	public void popCansFull(PopCanRack popCanRack) {
-		//Leave empty		
+		//Leave empty
 	}
 
 	@Override
 	public void popCansEmpty(PopCanRack popCanRack) {
 		//Leave empty
 	}
-	
+
 	@Override
 	public void validCoinInserted(CoinSlot slot, Coin coin) {
 		userCredit += coin.getValue(); //Increment the credit when valid coins are inserted
-		event = "Inserted $" + coin.getValue();
+		event = "Inserted $" + coin.getValue(); //Updates event
 	}
 
 	@Override
@@ -140,5 +140,5 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 		event = "Invalid coin inserted";
 	}
 
-	
+
 }
