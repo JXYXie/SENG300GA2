@@ -68,14 +68,6 @@ public class Test1 {
 		Coin toonie = new Coin(200);
 		
 		vm.getCoinSlot().addCoin(loonie); //100
-		assertEquals("Inserted $100", vml.getEvent()); //Tests coin insertion event
-		vm.getCoinSlot().addCoin(toonie); //100 + 200 = 
-		assertEquals(300, vml.getCredit()); //300 cents
-		
-		vm.getSelectionButton(0).press(); //I want water
-		assertEquals("Removed a Water", vml.getEvent()); //Tests pop removal event
-		
-		assertEquals(50, vml.getCredit()); //300 - cost of water (250) = 50 cents
 	}
 	
 	@Test
@@ -98,12 +90,6 @@ public class Test1 {
 		vm.getSelectionButton(0).press(); //I want water
 		vm.getSelectionButton(0).press(); //I want water
 		vm.getSelectionButton(0).press(); //I want water
-		assertEquals("Removed a Water", vml.getEvent()); //Tests pop removal event
-		assertEquals(250, vml.getCredit()); //1500 - 250*5 = 250
-		vm.getSelectionButton(0).press(); //Since the popRack has only 5 bottles,
-		assertEquals("Pop is sold out!", vml.getEvent()); //the pop is already sold out
-		
-		assertEquals(250, vml.getCredit()); //Since the pop is sold out, no charge will occur
 	}
 
 	@Test
@@ -112,7 +98,6 @@ public class Test1 {
 		Coin washer = new Coin(1); //Invalid coin
 		
 		vm.getCoinSlot().addCoin(washer);
-		assertEquals("Invalid coin inserted", vml.getEvent());
 		
 		vm.getSelectionButton(2).press(); //I want Sprite for free
 		

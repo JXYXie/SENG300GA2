@@ -1,8 +1,6 @@
 package ca.ucalgary.seng300.VendingMachineLogic;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,15 +17,12 @@ public class EventLogger {
 	private String fileName = "eventlog.txt";
 	private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS"); //Date Format is in Hour:minute:second.miliseconds
 	private static Date date = new Date();
-	private PrintWriter pw;
-	private FileWriter fw;
 	
 	void log(String event) {
-		try {
-			fw = new FileWriter(fileName);
-			pw = new PrintWriter(fw);
-			pw.append(String.format("%s - %s\n", dateFormat.format(date), event));
-			pw.close();
+		try(FileWriter fw = new FileWriter(fileName, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter out = new PrintWriter(bw)){
+			out.println(String.format("%s - %s\n", dateFormat.format(date), event));
 		} catch (IOException e) {
 			System.out.println("Error writing to file!");
 		}

@@ -29,6 +29,8 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	public VendingMachineLogic(VendingMachine vm) {
 
 		this.vm = vm;
+		logger = new EventLogger();
+		
 		userCredit = 0;
 		//For loop to iterate through all the available buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
@@ -38,20 +40,22 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		}
 		//Iterate through all available pop can racks
 		for (int i = 0; i < vm.getNumberOfPopCanRacks(); i++) {
-			vm.getPopCanRack(i).register(this); //Registers the relevant listeners
+			PopCanRack pcr = vm.getPopCanRack(i);
+			pcr.register(this); //Registers the relevant listeners
 		}
 		//Iterate through all available coin racks
 		for (int i = 0; i < vm.getNumberOfCoinRacks(); i++) {
-			vm.getPopCanRack(i).register(this); //Registers the relevant listeners
+			vm.getCoinRack(i).register(this); //Registers the relevant listeners
 		}
 		
 		//Now register all the rest of the listeners
 		vm.getCoinSlot().register(this);
 		vm.getDeliveryChute().register(this);
 		vm.getCoinReceptacle().register(this);
-		vm.getCoinReturn().register(this);
-		vm.getOutOfOrderLight().register(this);
-		vm.getExactChangeLight().register(this);
+		//TODO implement methods first before registering or else program wont run properly
+		//vm.getCoinReturn().register(this);
+		//vm.getOutOfOrderLight().register(this);
+		//vm.getExactChangeLight().register(this);
 		//TODO Display Listener
 		
 	}
