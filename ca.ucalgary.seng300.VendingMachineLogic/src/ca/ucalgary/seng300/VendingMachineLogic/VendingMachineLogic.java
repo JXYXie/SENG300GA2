@@ -8,6 +8,8 @@ package ca.ucalgary.seng300.VendingMachineLogic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.lsmr.vending.*;
 import org.lsmr.vending.hardware.*;
@@ -20,6 +22,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	private int userCredit;
 	private List<PushButton> buttonList = new ArrayList<>();
 	private String event;
+	private String currency;
 
 	/********************
 	 * Constructor
@@ -27,11 +30,13 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	 * and registers listeners
 	 *******************/
 	public VendingMachineLogic(VendingMachine vm) {
-
+		
 		this.vm = vm;
 		logger = new EventLogger();
 		
 		userCredit = 0;
+		currency = "CAD";
+		
 		//For loop to iterate through all the available buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
 			PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
@@ -57,7 +62,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		//vm.getOutOfOrderLight().register(this);
 		//vm.getExactChangeLight().register(this);
 		//TODO Display Listener
-		
+		noCred(); //Display looping message at beginning
 	}
 
 	@Override
@@ -76,7 +81,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	@Override
 	public void validCoinInserted(CoinSlot slot, Coin coin) {
 		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
-		event = "Inserted $" + coin.getValue(); //Updates event for coin insertion
+		event = "Inserted " + currency + " " + coin.getValue() + " cents"; //Updates event for coin insertion
 		logger.log(event); //Now logs that event
 		event = "Credit: " + userCredit; //Updates event for the display
 		vm.getDisplay().display(event); //Now displays the current credit
@@ -172,7 +177,9 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	public void pressed(PushButton button) {
 
 		int btnIndex = buttonList.indexOf(button) ; //Which button did the user press
-
+		
+		event = vm.getPopKindName(btnIndex) + " button at button index " + btnIndex + " pressed";
+		logger.log(event);
 		if (btnIndex == -1) { //Unregistered button is pressed
 			//Nothing happens for now
 		}
@@ -180,7 +187,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		int cost = vm.getPopKindCost(btnIndex);
 
 		if (cost > userCredit) { //Not enough money!!!
-			event = "Not enough money!"; //Updates message
+			event = "Insufficent credit for purchase"; //Updates message
 			vm.getDisplay().display(event); //Put the message on display
 			logger.log(event);//And log it to text file
 		} else {
@@ -189,6 +196,8 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 				pr.dispensePopCan(); //Dispenses the relevant pop
 				vm.getCoinReceptacle().storeCoins(); //Stores the change
 				userCredit -= cost; //Deduct the pay from the available credit
+				vm.getCoinReceptacle().returnCoins();
+				noCred();
 			} catch (DisabledException | CapacityExceededException e) {
 				throw new SimulationException(e);
 			} catch (EmptyException e2) {
@@ -293,6 +302,30 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	}
 	/********************************End IndicatorLight Listener*********************************/
 	
+	//Currently delay is NOT working
+	//void run is not being hit according to code coverage testing
+	public void noCred() {
+		if (userCredit == 0) {
+			event = "Hi there!";
+			logger.log(event);
+			final Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					vm.getDisplay().display(event);
+					logger.log(event);
+				}
+			}, 1000, 5000); //5 seconds
+			event = "";
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					vm.getDisplay().display(event);
+					logger.log(event);
+				}
+			}, 10000); //10 seconds
+		}
+	}
 	/**
 	 * Enables the safety of the vending machine
 	 */
