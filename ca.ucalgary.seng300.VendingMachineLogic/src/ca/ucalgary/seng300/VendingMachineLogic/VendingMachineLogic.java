@@ -12,9 +12,11 @@ import java.util.List;
 import org.lsmr.vending.*;
 import org.lsmr.vending.hardware.*;
 
-public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener, PushButtonListener, IndicatorLightListener, DeliveryChuteListener {
+public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, CoinReturnListener, CoinReceptacleListener, 
+	PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightListener {
 
 	private VendingMachine vm;
+	private EventLogger logger;
 	private int userCredit;
 	private List<PushButton> buttonList = new ArrayList<>();
 	private String event;
@@ -36,47 +38,132 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 		}
 		//Iterate through all available pop can racks
 		for (int i = 0; i < vm.getNumberOfPopCanRacks(); i++) {
-			PopCanRack pcr = vm.getPopCanRack(i); //Instantiates the hardware
-			pcr.register(this); //Registers the relevant listeners
+			vm.getPopCanRack(i).register(this); //Registers the relevant listeners
 		}
-
+		//Iterate through all available coin racks
+		for (int i = 0; i < vm.getNumberOfCoinRacks(); i++) {
+			vm.getPopCanRack(i).register(this); //Registers the relevant listeners
+		}
+		
+		//Now register all the rest of the listeners
 		vm.getCoinSlot().register(this);
+		vm.getDeliveryChute().register(this);
+		vm.getCoinReceptacle().register(this);
+		vm.getCoinReturn().register(this);
+		vm.getOutOfOrderLight().register(this);
+		vm.getExactChangeLight().register(this);
+		//TODO Display Listener
+		
+	}
 
-	}
-	
-	public void addCredit(int amount) {
-		userCredit += amount; 
-	}
-	
-	/**
-	 * @return the current event
-	 * Useful for printing things to a log file
-	 */
-	public String getEvent() {
-		return event;
-	}
-	
-	/**
-	 *
-	 * @return how much credit is in vending machine
-	 */
-	public int getCredit() {
-		return userCredit;
-	}
-	
 	@Override
 	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
 		//TODO
+		//Probably empty here
 	}
 
 	@Override
 	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
 		//TODO
+		//Probably empty here
+	}
+	
+	/*******************************Start CoinSlot Listener*************************************/
+	@Override
+	public void validCoinInserted(CoinSlot slot, Coin coin) {
+		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
+		event = "Inserted $" + coin.getValue(); //Updates event for coin insertion
+		logger.log(event); //Now logs that event
+		event = "Credit: " + userCredit; //Updates event for the display
+		vm.getDisplay().display(event); //Now displays the current credit
+		logger.log(event); //And logs the new event
 	}
 
-	/*************************
+	@Override
+	public void coinRejected(CoinSlot slot, Coin coin) {
+		event = "Invalid coin inserted";
+		logger.log(event);
+	}
+	/*******************************End CoinSlot Listener*************************************/
+	
+	/***********************************Start CoinRack Listener**************************************/
+	@Override
+	public void coinsFull(CoinRack rack) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void coinsEmpty(CoinRack rack) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void coinAdded(CoinRack rack, Coin coin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void coinRemoved(CoinRack rack, Coin coin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void coinsLoaded(CoinRack rack, Coin... coins) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void coinsUnloaded(CoinRack rack, Coin... coins) {
+		// TODO Auto-generated method stub
+		
+	}
+	/***********************************End CoinRack Listener**************************************/
+	
+	/********************************Start CoinReturn Listener******************************/
+	@Override
+	public void coinsDelivered(CoinReturn coinReturn, Coin[] coins) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void returnIsFull(CoinReturn coinReturn) {
+		// TODO Auto-generated method stub
+		
+	}
+	/************************************End CoinReturn Listener******************************/
+	
+	/******************************Start CoinReceptacle Listener******************************/
+	@Override
+	public void coinAdded(CoinReceptacle receptacle, Coin coin) {}
+
+	@Override
+	public void coinsRemoved(CoinReceptacle receptacle) {}
+
+	@Override
+	public void coinsFull(CoinReceptacle receptacle) {
+		event = "Coin receptacle full";
+		logger.log(event);
+		enableSafety();
+	}
+
+	@Override
+	public void coinsLoaded(CoinReceptacle receptacle, Coin... coins) {}
+
+	@Override
+	public void coinsUnloaded(CoinReceptacle receptacle, Coin... coins) {}
+	/******************************End CoinReceptacle Listener******************************/
+	
+	/*********************************Start Button Listener*****************************************/
+	
+	/***************************************************
 	 * Handles the logic of selection buttons
-	 *************************/
+	 **************************************************/
 	@Override
 	public void pressed(PushButton button) {
 
@@ -89,9 +176,11 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 		int cost = vm.getPopKindCost(btnIndex);
 
 		if (cost > userCredit) { //Not enough money!!!
-			
+			event = "Not enough money!"; //Updates message
+			vm.getDisplay().display(event); //Put the message on display
+			logger.log(event);//And log it to text file
 		} else {
-			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the pop rack
+			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the corresponding pop rack
 			try {
 				pr.dispensePopCan(); //Dispenses the relevant pop
 				vm.getCoinReceptacle().storeCoins(); //Stores the change
@@ -100,18 +189,24 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 				throw new SimulationException(e);
 			} catch (EmptyException e2) {
 				event = "Pop is sold out!"; //Set the event for sold-out
+				logger.log(event);
 			}
 		}
 	}
-
+	
+	/**********************************End Button Listener*****************************************/
+	
+	/********************************Start PopCanRack Listener*************************************/
 	@Override
 	public void popCanAdded(PopCanRack popCanRack, PopCan popCan) {
 		event = "Added " + popCan.getName();
+		logger.log(event);
 	}
 
 	@Override
 	public void popCanRemoved(PopCanRack popCanRack, PopCan popCan) {
 		event = "Removed a " + popCan.getName();
+		logger.log(event);
 	}
 
 	@Override
@@ -126,61 +221,112 @@ public class VendingMachineLogic implements CoinSlotListener, PopCanRackListener
 
 	@Override
 	public void popCansFull(PopCanRack popCanRack) {
-		//Leave empty
+		event = "Pop can rack full";
+		logger.log(event);
 	}
 
 	@Override
 	public void popCansEmpty(PopCanRack popCanRack) {
-		//Leave empty
+		event = "Pop can rack empty";
+		logger.log(event);
 	}
-
-	@Override
-	public void validCoinInserted(CoinSlot slot, Coin coin) {
-		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
-		event = "Inserted $" + coin.getValue(); //Updates event
-		vm.getDisplay().display("Credit: " + userCredit); //Now displays the current credit
-	}
-
-	@Override
-	public void coinRejected(CoinSlot slot, Coin coin) {
-		event = "Invalid coin inserted";
-	}
-
-	@Override
-	public void activated(IndicatorLight light) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deactivated(IndicatorLight light) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	/*******************************End PopCanRack Listener*************************************/
+	
+	/********************************Start DeliveryChute Listener********************************/
 	@Override
 	public void itemDelivered(DeliveryChute chute) {
-		// TODO Auto-generated method stub
+		// TODO maybe?
 		
 	}
 
 	@Override
 	public void doorOpened(DeliveryChute chute) {
-		// TODO Auto-generated method stub
-		
+		event = "Delivery chute door opened";
+		logger.log(event);
 	}
 
 	@Override
 	public void doorClosed(DeliveryChute chute) {
-		// TODO Auto-generated method stub
-		
+		event = "Delivery chute door closed";
+		logger.log(event);
 	}
 
 	@Override
 	public void chuteFull(DeliveryChute chute) {
-		// TODO Auto-generated method stub
+		event = "Delivery chute door opened";
+		logger.log(event);
+		enableSafety(); //enables the safety
 		
 	}
+	/******************************End DeliveryChute Listener********************************/
+	
+	/******************************Start IndicatorLight Listener********************************/
+	/**
+	 * Indicator light behaviour
+	 * Toggles the lights and logs the relevant actions
+	 */
+	@Override
+	public void activated(IndicatorLight light) {
+		if (light == vm.getExactChangeLight()) {
+			event = "Exact change only light turned on";
+		}
+		else if (light == vm.getOutOfOrderLight()) {
+			event = "Out of order light turned on";
+		}
+		logger.log(event);
+	}
 
-
+	@Override
+	public void deactivated(IndicatorLight light) {
+		if (light == vm.getExactChangeLight()) {
+			event = "Exact change only light turned off";
+		}
+		else if (light == vm.getOutOfOrderLight()) {
+			event = "Out of order light turned off";
+		}
+		logger.log(event);		
+	}
+	/********************************End IndicatorLight Listener*********************************/
+	
+	/**
+	 * Enables the safety of the vending machine
+	 */
+	void enableSafety() {
+		vm.enableSafety();
+		event = "Safety enabled!";
+		logger.log(event);
+	}
+	
+	/**
+	 * Disables the safety of the vending machine
+	 */
+	void disableSafety() {
+		vm.disableSafety();
+		event = "Safety disabled!";
+		logger.log(event);
+	}
+	
+	/**
+	 * @param amount of credit to be added
+	 */
+	public void addCredit(int amount) {
+		userCredit += amount;
+	}
+	
+	/**
+	 * @return the current event
+	 * Useful for printing things to a log file or do display
+	 */
+	public String getEvent() {
+		return event;
+	}
+	
+	/**
+	 * @return how much credit is in vending machine
+	 */
+	public int getCredit() {
+		return userCredit;
+	}
+	
 }
