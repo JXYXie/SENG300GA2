@@ -267,7 +267,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 
 	@Override
 	public void chuteFull(DeliveryChute chute) {
-		event = "Delivery chute door opened";
+		event = "Delivery chute full";
 		logger.log(event);
 		enableSafety(); //enables the safety
 		
