@@ -97,10 +97,5 @@ public class Test1 {
 		
 		Coin washer = new Coin(1); //Invalid coin
 		
-		vm.getCoinSlot().addCoin(washer);
-		
-		vm.getSelectionButton(2).press(); //I want Sprite for free
-		
-		assertEquals(0, vml.getCredit()); //No credit
 	}	
 }
