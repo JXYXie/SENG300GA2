@@ -16,9 +16,10 @@ public class EventLogger {
 	
 	private String fileName = "eventlog.txt";
 	private DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS"); //Date Format is in Hour:minute:second.miliseconds
-	private static Date date = new Date();
+	private static Date date;
 	
 	void log(String event) {
+		date = new Date();
 		try(FileWriter fw = new FileWriter(fileName, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter out = new PrintWriter(bw)){

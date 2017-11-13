@@ -19,6 +19,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 
 	private VendingMachine vm;
 	private EventLogger logger;
+	private Timer timer = new Timer();
 	private int userCredit;
 	private List<PushButton> buttonList = new ArrayList<>();
 	private String event;
@@ -62,7 +63,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		//vm.getOutOfOrderLight().register(this);
 		//vm.getExactChangeLight().register(this);
 		//TODO Display Listener
-		noCred(); //Display looping message at beginning
+		display(""); //Display looping message at beginning
 	}
 
 	@Override
@@ -84,8 +85,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		event = "Inserted " + currency + " " + coin.getValue() + " cents"; //Updates event for coin insertion
 		logger.log(event); //Now logs that event
 		event = "Credit: " + userCredit; //Updates event for the display
-		vm.getDisplay().display(event); //Now displays the current credit
-		logger.log(event); //And logs the new event
+		display(event); //Displays the current credit for and logs it to file
 	}
 
 	@Override
@@ -188,8 +188,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 
 		if (cost > userCredit) { //Not enough money!!!
 			event = "Insufficent credit for purchase"; //Updates message
-			vm.getDisplay().display(event); //Put the message on display
-			logger.log(event);//And log it to text file
+			display(event);
 		} else {
 			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the corresponding pop rack
 			try {
@@ -197,7 +196,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 				vm.getCoinReceptacle().storeCoins(); //Stores the change
 				userCredit -= cost; //Deduct the pay from the available credit
 				vm.getCoinReceptacle().returnCoins();
-				noCred();
+				display("");
 			} catch (DisabledException | CapacityExceededException e) {
 				throw new SimulationException(e);
 			} catch (EmptyException e2) {
@@ -267,7 +266,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 
 	@Override
 	public void chuteFull(DeliveryChute chute) {
-		event = "Delivery chute full";
+		event = "Delivery chute door full";
 		logger.log(event);
 		enableSafety(); //enables the safety
 		
@@ -302,30 +301,38 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	}
 	/********************************End IndicatorLight Listener*********************************/
 	
-	//Currently delay is NOT working
-	//void run is not being hit according to code coverage testing
-	public void noCred() {
-		if (userCredit == 0) {
-			event = "Hi there!";
-			logger.log(event);
-			final Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
+	//TODO More testing somewhat broken
+	public void display(String event) {
+		
+		if (userCredit > 0) { //if there is still credit in the vending machine
+			resetTimer();
+			vm.getDisplay().display(event);
+			logger.log("DISPLAY: " + event);
+		}
+		else { //credit is 0
+			String noCreditEvent = "Hi there!";
+			resetTimer();
+			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					vm.getDisplay().display(event);
-					logger.log(event);
+					vm.getDisplay().display(noCreditEvent);
+					logger.log("DISPLAY: " + noCreditEvent);
 				}
-			}, 1000, 5000); //5 seconds
-			event = "";
-			timer.schedule(new TimerTask() {
+			}, 0, 5000);
+			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					vm.getDisplay().display(event);
-					logger.log(event);
+					vm.getDisplay().display("");
 				}
-			}, 10000); //10 seconds
+			}, 0, 15000);
 		}
 	}
+	
+	private void resetTimer() {
+		timer.cancel();
+		timer = new Timer();
+	}
+	
 	/**
 	 * Enables the safety of the vending machine
 	 */

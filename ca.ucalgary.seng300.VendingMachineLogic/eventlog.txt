@@ -1,0 +1,148 @@
+16:16:57.804 - DISPLAY: Hi there!
+
+16:16:57.808 - Inserted CAD 100 cents
+
+16:16:57.814 - DISPLAY: Credit: 100
+
+16:16:57.822 - Inserted CAD 200 cents
+
+16:16:57.823 - DISPLAY: Hi there!
+
+16:16:57.829 - DISPLAY: Credit: 200
+
+16:16:57.836 - Inserted CAD 200 cents
+
+16:16:57.843 - DISPLAY: Credit: 400
+
+16:16:57.849 - Inserted CAD 200 cents
+
+16:16:57.856 - DISPLAY: Credit: 600
+
+16:16:57.862 - Inserted CAD 200 cents
+
+16:16:57.869 - DISPLAY: Credit: 800
+
+16:16:57.876 - Inserted CAD 200 cents
+
+16:16:57.882 - DISPLAY: Credit: 1000
+
+16:16:57.888 - Inserted CAD 200 cents
+
+16:16:57.894 - DISPLAY: Credit: 1200
+
+16:16:57.899 - Inserted CAD 200 cents
+
+16:16:57.907 - DISPLAY: Credit: 1400
+
+16:16:57.913 - Inserted CAD 100 cents
+
+16:16:57.918 - DISPLAY: Credit: 1500
+
+16:16:57.923 - Water button at button index 0 pressed
+
+16:16:57.928 - Removed a Water
+
+16:16:57.933 - DISPLAY: 
+
+16:16:57.940 - Water button at button index 0 pressed
+
+16:16:57.950 - Removed a Water
+
+16:16:57.960 - DISPLAY: 
+
+16:16:57.967 - Water button at button index 0 pressed
+
+16:16:57.973 - Removed a Water
+
+16:16:57.980 - DISPLAY: 
+
+16:16:57.985 - Water button at button index 0 pressed
+
+16:16:57.990 - Removed a Water
+
+16:16:57.997 - DISPLAY: 
+
+16:16:58.002 - Water button at button index 0 pressed
+
+16:16:58.007 - Removed a Water
+
+16:16:58.012 - Pop can rack empty
+
+16:16:58.017 - DISPLAY: 
+
+16:16:58.023 - DISPLAY: Hi there!
+
+16:25:57.064 - Inserted CAD 100 cents
+
+16:25:57.068 - DISPLAY: Hi there!
+
+16:25:57.076 - DISPLAY: Credit: 100
+
+16:25:57.085 - Inserted CAD 200 cents
+
+16:25:57.087 - DISPLAY: Hi there!
+
+16:25:57.094 - DISPLAY: Credit: 200
+
+16:25:57.100 - Inserted CAD 200 cents
+
+16:25:57.108 - DISPLAY: Credit: 400
+
+16:25:57.114 - Inserted CAD 200 cents
+
+16:25:57.121 - DISPLAY: Credit: 600
+
+16:25:57.128 - Inserted CAD 200 cents
+
+16:25:57.135 - DISPLAY: Credit: 800
+
+16:25:57.142 - Inserted CAD 200 cents
+
+16:25:57.149 - DISPLAY: Credit: 1000
+
+16:25:57.155 - Inserted CAD 200 cents
+
+16:25:57.163 - DISPLAY: Credit: 1200
+
+16:25:57.169 - Inserted CAD 200 cents
+
+16:25:57.176 - DISPLAY: Credit: 1400
+
+16:25:57.183 - Inserted CAD 100 cents
+
+16:25:57.190 - DISPLAY: Credit: 1500
+
+16:25:57.197 - Water button at button index 0 pressed
+
+16:25:57.202 - Removed a Water
+
+16:25:57.207 - DISPLAY: 
+
+16:25:57.212 - Water button at button index 0 pressed
+
+16:25:57.217 - Removed a Water
+
+16:25:57.222 - DISPLAY: 
+
+16:25:57.227 - Water button at button index 0 pressed
+
+16:25:57.232 - Removed a Water
+
+16:25:57.237 - DISPLAY: 
+
+16:25:57.244 - Water button at button index 0 pressed
+
+16:25:57.250 - Removed a Water
+
+16:25:57.257 - DISPLAY: 
+
+16:25:57.264 - Water button at button index 0 pressed
+
+16:25:57.269 - Removed a Water
+
+16:25:57.275 - Pop can rack empty
+
+16:25:57.280 - DISPLAY: 
+
+16:25:57.286 - DISPLAY: Hi there!
+
