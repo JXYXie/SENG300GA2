@@ -250,7 +250,10 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	/********************************Start DeliveryChute Listener********************************/
 	@Override
 	public void itemDelivered(DeliveryChute chute) {
-		// TODO maybe?
+		//Simulates opening the chute for the customer
+		event = "Item Delivered";
+		logger.log(event);
+		chute.removeItems();
 		
 	}
 
