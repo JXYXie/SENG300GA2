@@ -14,7 +14,7 @@ import java.util.TimerTask;
 import org.lsmr.vending.*;
 import org.lsmr.vending.hardware.*;
 
-public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, CoinReturnListener, CoinReceptacleListener, 
+public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, CoinReceptacleListener, 
 	PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightListener {
 
 	private VendingMachine vm;
@@ -59,24 +59,16 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		vm.getDeliveryChute().register(this);
 		vm.getCoinReceptacle().register(this);
 		//TODO implement methods first before registering or else program wont run properly
-		//vm.getCoinReturn().register(this);
-		//vm.getOutOfOrderLight().register(this);
-		//vm.getExactChangeLight().register(this);
-		//TODO Display Listener
+		vm.getOutOfOrderLight().register(this);
+		vm.getExactChangeLight().register(this);
 		display(""); //Display looping message at beginning
 	}
 
 	@Override
-	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
-		//TODO
-		//Probably empty here
-	}
+	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {}
 
 	@Override
-	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {
-		//TODO
-		//Probably empty here
-	}
+	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {}
 	
 	/*******************************Start CoinSlot Listener*************************************/
 	//When a valid coin is inserted into the vending machine
@@ -99,54 +91,35 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	/***********************************Start CoinRack Listener**************************************/
 	@Override
 	public void coinsFull(CoinRack rack) {
-		// TODO Auto-generated method stub
-		
+		event = "A coin rack is full";
+		logger.log(event);
 	}
 
 	@Override
 	public void coinsEmpty(CoinRack rack) {
-		// TODO Auto-generated method stub
-		
+		event = "A coin rack is empty";
+		logger.log(event);
 	}
 
 	@Override
 	public void coinAdded(CoinRack rack, Coin coin) {
-		// TODO Auto-generated method stub
-		
+		event = coin.getValue() + "coin has been added to its rack";
+		logger.log(event);
 	}
 
 	@Override
 	public void coinRemoved(CoinRack rack, Coin coin) {
-		// TODO Auto-generated method stub
-		
+		event = coin.getValue() + "coin has been removed from its rack";
+		logger.log(event);
 	}
 
 	@Override
-	public void coinsLoaded(CoinRack rack, Coin... coins) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void coinsLoaded(CoinRack rack, Coin... coins) {}
 
 	@Override
-	public void coinsUnloaded(CoinRack rack, Coin... coins) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void coinsUnloaded(CoinRack rack, Coin... coins) {}
 	/***********************************End CoinRack Listener**************************************/
 	
-	/********************************Start CoinReturn Listener******************************/
-	@Override
-	public void coinsDelivered(CoinReturn coinReturn, Coin[] coins) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void returnIsFull(CoinReturn coinReturn) {
-		// TODO Auto-generated method stub
-		
-	}
-	/************************************End CoinReturn Listener******************************/
 	
 	/******************************Start CoinReceptacle Listener******************************/
 	@Override
@@ -250,7 +223,10 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	/********************************Start DeliveryChute Listener********************************/
 	@Override
 	public void itemDelivered(DeliveryChute chute) {
-		// TODO maybe?
+		//Simulates opening the chute for the customer
+		event = "Item Delivered";
+		logger.log(event);
+		chute.removeItems();
 		
 	}
 
@@ -309,7 +285,8 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		if (userCredit > 0) { //if there is still credit in the vending machine
 			resetTimer();
 			vm.getDisplay().display(event);
-			logger.log("DISPLAY: " + event);
+			if (event != null)
+				logger.log("DISPLAY: " + event);
 		}
 		else { //credit is 0
 			String noCreditEvent = "Hi there!";
@@ -362,7 +339,6 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 			vm.getExactChangeLight().deactivate();
 		}
 	
-	
 	private void resetTimer() {
 		timer.cancel();
 		timer = new Timer();
@@ -407,5 +383,5 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	public int getCredit() {
 		return userCredit;
 	}
-	
+
 }
