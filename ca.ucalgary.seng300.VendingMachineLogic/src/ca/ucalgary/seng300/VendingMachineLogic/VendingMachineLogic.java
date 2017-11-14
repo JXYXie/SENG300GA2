@@ -88,7 +88,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		event = "Credit: " + userCredit; //Updates event for the display
 		display(event); //Displays the current credit for and logs it to file
 	}
-
+	//Rejects an invalid coin
 	@Override
 	public void coinRejected(CoinSlot slot, Coin coin) {
 		event = "Invalid coin inserted";
@@ -210,12 +210,13 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	/**********************************End Button Listener*****************************************/
 	
 	/********************************Start PopCanRack Listener*************************************/
+	//Adding PopCan to PopCanRack
 	@Override
 	public void popCanAdded(PopCanRack popCanRack, PopCan popCan) {
 		event = "Added " + popCan.getName();
 		logger.log(event);
 	}
-
+	//Removing PopCan from PopCanRack
 	@Override
 	public void popCanRemoved(PopCanRack popCanRack, PopCan popCan) {
 		event = "Removed a " + popCan.getName();
