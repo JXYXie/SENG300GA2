@@ -26,7 +26,7 @@ public class VMLogicTester {
 		int btnCount = 6; //6 types of pop
 		int coinRackCapacity = 5;
 		int popRackCapacity = 10;
-		int receptacleCapacity = 200;
+		int receptacleCapacity = 8;
 		int deliveryChuteCapacity = 10;
 		int coinReturnCapacity = 10;
 		
