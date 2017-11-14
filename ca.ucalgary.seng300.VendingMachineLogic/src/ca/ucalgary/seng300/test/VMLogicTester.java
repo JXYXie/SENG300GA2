@@ -80,6 +80,7 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 
+
 	}
 	//attempting to purchase with sufficient credits
 	@Test
@@ -120,9 +121,10 @@ public class VMLogicTester {
 	//purchase normally
 	@Test
 	public void normPurchase() throws DisabledException, SimulationException{
-		vm.getPopCanRack(0).load(popCans);
+		Coin toonie = new Coin(200);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getSelectionButton(1).press();
 	}
-	
-	//max insertCoins
 
 }
