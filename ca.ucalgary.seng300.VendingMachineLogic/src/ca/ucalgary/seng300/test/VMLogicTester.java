@@ -127,4 +127,5 @@ public class VMLogicTester {
 		vm.getSelectionButton(1).press();
 	}
 
+
 }
