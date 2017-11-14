@@ -101,5 +101,15 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
 	}
-	
+    //paying exact price with no change return
+    @Test
+    public void test6() throws DisabledException {
+        Coin toonie = new Coin(200);
+        Coin quarter = new Coin(25);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(toonie);
+        vm.getSelectionButton(3).press();
+    }
+    
 }
