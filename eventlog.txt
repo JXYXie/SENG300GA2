@@ -2044,3 +2044,821 @@
 
 20:22:35.045 - DISPLAY: 
 
+23:26:15.683 - DISPLAY: Hi there!
+
+23:26:15.686 - Inserted CAD 200 cents
+
+23:26:15.693 - DISPLAY: Credit: 200
+
+23:26:15.699 - Mountain Dew button at button index 3 pressed
+
+23:26:15.705 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.715 - Inserted CAD 200 cents
+
+23:26:15.715 - DISPLAY: Hi there!
+
+23:26:15.727 - DISPLAY: Credit: 200
+
+23:26:15.737 - Mountain Dew button at button index 3 pressed
+
+23:26:15.748 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.756 - Mountain Dew button at button index 3 pressed
+
+23:26:15.765 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.772 - Mountain Dew button at button index 3 pressed
+
+23:26:15.781 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.788 - Mountain Dew button at button index 3 pressed
+
+23:26:15.796 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.804 - Mountain Dew button at button index 3 pressed
+
+23:26:15.811 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.819 - Mountain Dew button at button index 3 pressed
+
+23:26:15.826 - DISPLAY: Insufficent credit for purchase
+
+23:26:15.835 - DISPLAY: Hi there!
+
+23:26:15.835 - Inserted CAD 200 cents
+
+23:26:15.843 - DISPLAY: Credit: 200
+
+23:26:15.851 - DISPLAY: Hi there!
+
+23:26:15.853 - Inserted CAD 100 cents
+
+23:26:15.854 - DISPLAY: Hi there!
+
+23:26:15.860 - DISPLAY: Credit: 100
+
+23:26:15.867 - Inserted CAD 100 cents
+
+23:26:15.872 - DISPLAY: Credit: 200
+
+23:26:15.878 - Inserted CAD 100 cents
+
+23:26:15.883 - DISPLAY: Credit: 300
+
+23:26:15.888 - Inserted CAD 100 cents
+
+23:26:15.893 - DISPLAY: Credit: 400
+
+23:26:15.900 - Inserted CAD 100 cents
+
+23:26:15.905 - DISPLAY: Credit: 500
+
+23:26:15.910 - Inserted CAD 100 cents
+
+23:26:15.915 - DISPLAY: Credit: 600
+
+23:26:15.921 - Inserted CAD 100 cents
+
+23:26:15.926 - DISPLAY: Credit: 700
+
+23:26:15.933 - Coin receptacle full
+
+23:26:15.939 - Safety enabled!
+
+23:26:15.944 - Inserted CAD 100 cents
+
+23:26:15.950 - DISPLAY: Credit: 800
+
+23:26:15.957 - DISPLAY: Hi there!
+
+23:26:15.957 - Inserted CAD 200 cents
+
+23:26:15.962 - DISPLAY: Credit: 200
+
+23:26:15.968 - Inserted CAD 200 cents
+
+23:26:15.973 - DISPLAY: Credit: 400
+
+23:26:15.979 - Mountain Dew button at button index 3 pressed
+
+23:26:15.985 - Pop is sold out!
+
+23:26:15.991 - Inserted CAD 200 cents
+
+23:26:15.991 - DISPLAY: Hi there!
+
+23:26:15.996 - DISPLAY: Credit: 200
+
+23:26:16.002 - Inserted CAD 200 cents
+
+23:26:16.007 - DISPLAY: Credit: 400
+
+23:26:16.012 - Pepsi button at button index 1 pressed
+
+23:26:16.018 - Removed a Pepsi
+
+23:26:16.023 - Item Delivered
+
+23:26:16.028 - Delivery chute door opened
+
+23:26:16.035 - Delivery chute door closed
+
+23:26:16.041 - DISPLAY: 
+
+23:26:53.081 - DISPLAY: Hi there!
+
+23:26:53.084 - Inserted CAD 100 cents
+
+23:26:53.090 - DISPLAY: Credit: 100
+
+23:26:53.100 - Inserted CAD 200 cents
+
+23:26:53.100 - DISPLAY: Hi there!
+
+23:26:53.109 - DISPLAY: Credit: 200
+
+23:26:53.114 - Inserted CAD 200 cents
+
+23:26:53.120 - DISPLAY: Credit: 400
+
+23:26:53.126 - Inserted CAD 200 cents
+
+23:26:53.134 - DISPLAY: Credit: 600
+
+23:26:53.142 - Inserted CAD 200 cents
+
+23:26:53.148 - DISPLAY: Credit: 800
+
+23:26:53.155 - Inserted CAD 200 cents
+
+23:26:53.163 - DISPLAY: Credit: 1000
+
+23:26:53.168 - Inserted CAD 200 cents
+
+23:26:53.174 - DISPLAY: Credit: 1200
+
+23:26:53.179 - Inserted CAD 200 cents
+
+23:26:53.185 - DISPLAY: Credit: 1400
+
+23:26:53.192 - Inserted CAD 100 cents
+
+23:26:53.198 - DISPLAY: Credit: 1500
+
+23:26:53.206 - Water button at button index 0 pressed
+
+23:26:53.215 - Removed a Water
+
+23:26:53.233 - Item Delivered
+
+23:26:53.245 - Delivery chute door opened
+
+23:26:53.253 - Delivery chute door closed
+
+23:26:53.262 - DISPLAY: 
+
+23:26:53.270 - Water button at button index 0 pressed
+
+23:26:53.278 - Removed a Water
+
+23:26:53.286 - Item Delivered
+
+23:26:53.294 - Delivery chute door opened
+
+23:26:53.299 - Delivery chute door closed
+
+23:26:53.305 - DISPLAY: 
+
+23:26:53.311 - Water button at button index 0 pressed
+
+23:26:53.316 - Removed a Water
+
+23:26:53.321 - Item Delivered
+
+23:26:53.326 - Delivery chute door opened
+
+23:26:53.331 - Delivery chute door closed
+
+23:26:53.337 - DISPLAY: 
+
+23:26:53.344 - Water button at button index 0 pressed
+
+23:26:53.351 - Removed a Water
+
+23:26:53.356 - Item Delivered
+
+23:26:53.361 - Delivery chute door opened
+
+23:26:53.366 - Delivery chute door closed
+
+23:26:53.372 - DISPLAY: 
+
+23:26:53.377 - Water button at button index 0 pressed
+
+23:26:53.382 - Removed a Water
+
+23:26:53.387 - Item Delivered
+
+23:26:53.392 - Delivery chute door opened
+
+23:26:53.398 - Delivery chute door closed
+
+23:26:53.403 - Pop can rack empty
+
+23:26:53.409 - DISPLAY: 
+
+23:26:53.415 - DISPLAY: Hi there!
+
+23:28:05.295 - DISPLAY: Hi there!
+
+23:28:05.298 - Inserted CAD 200 cents
+
+23:28:05.306 - DISPLAY: Credit: 200
+
+23:28:05.312 - Mountain Dew button at button index 3 pressed
+
+23:28:05.318 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.327 - Inserted CAD 200 cents
+
+23:28:05.328 - DISPLAY: Hi there!
+
+23:28:05.336 - DISPLAY: Credit: 200
+
+23:28:05.344 - Mountain Dew button at button index 3 pressed
+
+23:28:05.352 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.359 - Mountain Dew button at button index 3 pressed
+
+23:28:05.367 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.374 - Mountain Dew button at button index 3 pressed
+
+23:28:05.382 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.390 - Mountain Dew button at button index 3 pressed
+
+23:28:05.397 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.405 - Mountain Dew button at button index 3 pressed
+
+23:28:05.412 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.420 - Mountain Dew button at button index 3 pressed
+
+23:28:05.427 - DISPLAY: Insufficent credit for purchase
+
+23:28:05.448 - Inserted CAD 200 cents
+
+23:28:05.463 - DISPLAY: Hi there!
+
+23:28:05.472 - DISPLAY: Credit: 200
+
+23:28:05.481 - Inserted CAD 100 cents
+
+23:28:05.482 - DISPLAY: Hi there!
+
+23:28:05.483 - DISPLAY: Hi there!
+
+23:28:05.488 - DISPLAY: Credit: 100
+
+23:28:05.493 - Inserted CAD 100 cents
+
+23:28:05.499 - DISPLAY: Credit: 200
+
+23:28:05.505 - Inserted CAD 100 cents
+
+23:28:05.510 - DISPLAY: Credit: 300
+
+23:28:05.515 - Inserted CAD 100 cents
+
+23:28:05.521 - DISPLAY: Credit: 400
+
+23:28:05.526 - Inserted CAD 100 cents
+
+23:28:05.531 - DISPLAY: Credit: 500
+
+23:28:05.536 - Inserted CAD 100 cents
+
+23:28:05.542 - DISPLAY: Credit: 600
+
+23:28:05.549 - Inserted CAD 100 cents
+
+23:28:05.557 - DISPLAY: Credit: 700
+
+23:28:05.564 - Coin receptacle full
+
+23:28:05.569 - Safety enabled!
+
+23:28:05.574 - Inserted CAD 100 cents
+
+23:28:05.580 - DISPLAY: Credit: 800
+
+23:28:05.586 - Inserted CAD 200 cents
+
+23:28:05.586 - DISPLAY: Hi there!
+
+23:28:05.591 - DISPLAY: Credit: 200
+
+23:28:05.597 - Inserted CAD 200 cents
+
+23:28:05.602 - DISPLAY: Credit: 400
+
+23:28:05.607 - Mountain Dew button at button index 3 pressed
+
+23:28:05.613 - Pop is sold out!
+
+23:28:05.619 - Inserted CAD 200 cents
+
+23:28:05.619 - DISPLAY: Hi there!
+
+23:28:05.624 - DISPLAY: Credit: 200
+
+23:28:05.630 - Inserted CAD 200 cents
+
+23:28:05.636 - DISPLAY: Credit: 400
+
+23:28:05.641 - Pepsi button at button index 1 pressed
+
+23:28:05.647 - Removed a Pepsi
+
+23:28:05.653 - Item Delivered
+
+23:28:05.658 - Delivery chute door opened
+
+23:28:05.664 - Delivery chute door closed
+
+23:28:05.670 - DISPLAY: 
+
+23:28:17.206 - DISPLAY: Hi there!
+
+23:28:17.219 - Inserted CAD 100 cents
+
+23:28:17.229 - DISPLAY: Credit: 100
+
+23:28:17.243 - Inserted CAD 200 cents
+
+23:28:17.248 - DISPLAY: Hi there!
+
+23:28:17.251 - DISPLAY: Credit: 200
+
+23:28:17.259 - Inserted CAD 200 cents
+
+23:28:17.267 - DISPLAY: Credit: 400
+
+23:28:17.275 - Inserted CAD 200 cents
+
+23:28:17.288 - DISPLAY: Credit: 600
+
+23:28:17.298 - Inserted CAD 200 cents
+
+23:28:17.309 - DISPLAY: Credit: 800
+
+23:28:17.318 - Inserted CAD 200 cents
+
+23:28:17.326 - DISPLAY: Credit: 1000
+
+23:28:17.334 - Inserted CAD 200 cents
+
+23:28:17.341 - DISPLAY: Credit: 1200
+
+23:28:17.349 - Inserted CAD 200 cents
+
+23:28:17.356 - DISPLAY: Credit: 1400
+
+23:28:17.364 - Inserted CAD 100 cents
+
+23:28:17.372 - DISPLAY: Credit: 1500
+
+23:28:17.379 - Water button at button index 0 pressed
+
+23:28:17.386 - Removed a Water
+
+23:28:17.393 - Item Delivered
+
+23:28:17.401 - Delivery chute door opened
+
+23:28:17.408 - Delivery chute door closed
+
+23:28:17.415 - DISPLAY: 
+
+23:28:17.420 - Water button at button index 0 pressed
+
+23:28:17.425 - Removed a Water
+
+23:28:17.431 - Item Delivered
+
+23:28:17.436 - Delivery chute door opened
+
+23:28:17.443 - Delivery chute door closed
+
+23:28:17.450 - DISPLAY: 
+
+23:28:17.455 - Water button at button index 0 pressed
+
+23:28:17.462 - Removed a Water
+
+23:28:17.467 - Item Delivered
+
+23:28:17.472 - Delivery chute door opened
+
+23:28:17.478 - Delivery chute door closed
+
+23:28:17.484 - DISPLAY: 
+
+23:28:17.490 - Water button at button index 0 pressed
+
+23:28:17.497 - Removed a Water
+
+23:28:17.502 - Item Delivered
+
+23:28:17.507 - Delivery chute door opened
+
+23:28:17.512 - Delivery chute door closed
+
+23:28:17.519 - DISPLAY: 
+
+23:28:17.524 - Water button at button index 0 pressed
+
+23:28:17.529 - Removed a Water
+
+23:28:17.535 - Item Delivered
+
+23:28:17.542 - Delivery chute door opened
+
+23:28:17.548 - Delivery chute door closed
+
+23:28:17.553 - Pop can rack empty
+
+23:28:17.559 - DISPLAY: 
+
+23:28:17.566 - DISPLAY: Hi there!
+
+23:28:29.785 - Inserted CAD 200 cents
+
+23:28:29.795 - DISPLAY: Credit: 200
+
+23:28:29.804 - Mountain Dew button at button index 3 pressed
+
+23:28:29.815 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.826 - Inserted CAD 200 cents
+
+23:28:29.834 - DISPLAY: Credit: 200
+
+23:28:29.847 - Mountain Dew button at button index 3 pressed
+
+23:28:29.856 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.900 - Mountain Dew button at button index 3 pressed
+
+23:28:29.908 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.918 - Mountain Dew button at button index 3 pressed
+
+23:28:29.926 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.936 - Mountain Dew button at button index 3 pressed
+
+23:28:29.945 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.955 - Mountain Dew button at button index 3 pressed
+
+23:28:29.964 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.972 - Mountain Dew button at button index 3 pressed
+
+23:28:29.981 - DISPLAY: Insufficent credit for purchase
+
+23:28:29.991 - Inserted CAD 200 cents
+
+23:28:29.999 - DISPLAY: Credit: 200
+
+23:28:30.011 - Inserted CAD 100 cents
+
+23:28:30.025 - DISPLAY: Hi there!
+
+23:28:30.026 - DISPLAY: Hi there!
+
+23:28:30.031 - DISPLAY: Credit: 100
+
+23:28:30.042 - Inserted CAD 100 cents
+
+23:28:30.050 - DISPLAY: Credit: 200
+
+23:28:30.058 - Inserted CAD 100 cents
+
+23:28:30.073 - DISPLAY: Credit: 300
+
+23:28:30.083 - Inserted CAD 100 cents
+
+23:28:30.093 - DISPLAY: Credit: 400
+
+23:28:30.102 - Inserted CAD 100 cents
+
+23:28:30.109 - DISPLAY: Credit: 500
+
+23:28:30.124 - Inserted CAD 100 cents
+
+23:28:30.139 - DISPLAY: Credit: 600
+
+23:28:30.157 - Inserted CAD 100 cents
+
+23:28:30.169 - DISPLAY: Credit: 700
+
+23:28:30.181 - Coin receptacle full
+
+23:28:30.192 - Safety enabled!
+
+23:28:30.201 - Inserted CAD 100 cents
+
+23:28:30.208 - DISPLAY: Credit: 800
+
+23:28:30.216 - Inserted CAD 200 cents
+
+23:28:30.216 - DISPLAY: Hi there!
+
+23:28:30.224 - DISPLAY: Credit: 200
+
+23:28:30.231 - Inserted CAD 200 cents
+
+23:28:30.237 - DISPLAY: Credit: 400
+
+23:28:30.242 - Mountain Dew button at button index 3 pressed
+
+23:28:30.248 - Pop is sold out!
+
+23:28:30.254 - Inserted CAD 200 cents
+
+23:28:30.254 - DISPLAY: Hi there!
+
+23:28:30.260 - DISPLAY: Credit: 200
+
+23:28:30.265 - Inserted CAD 200 cents
+
+23:28:30.271 - DISPLAY: Credit: 400
+
+23:28:30.277 - Pepsi button at button index 1 pressed
+
+23:28:30.285 - Removed a Pepsi
+
+23:28:30.290 - Item Delivered
+
+23:28:30.295 - Delivery chute door opened
+
+23:28:30.301 - Delivery chute door closed
+
+23:28:30.307 - DISPLAY: 
+
+23:39:38.048 - DISPLAY: Hi there!
+
+23:39:38.053 - Inserted CAD 200 cents
+
+23:39:38.058 - DISPLAY: Credit: 200
+
+23:39:38.064 - Mountain Dew button at button index 3 pressed
+
+23:39:38.071 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.081 - Inserted CAD 200 cents
+
+23:39:38.081 - DISPLAY: Hi there!
+
+23:39:38.089 - DISPLAY: Credit: 200
+
+23:39:38.096 - Mountain Dew button at button index 3 pressed
+
+23:39:38.104 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.112 - Mountain Dew button at button index 3 pressed
+
+23:39:38.120 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.128 - Mountain Dew button at button index 3 pressed
+
+23:39:38.155 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.163 - Mountain Dew button at button index 3 pressed
+
+23:39:38.171 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.179 - Mountain Dew button at button index 3 pressed
+
+23:39:38.186 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.196 - Mountain Dew button at button index 3 pressed
+
+23:39:38.203 - DISPLAY: Insufficent credit for purchase
+
+23:39:38.212 - Inserted CAD 200 cents
+
+23:39:38.212 - DISPLAY: Hi there!
+
+23:39:38.220 - DISPLAY: Credit: 200
+
+23:39:38.228 - Inserted CAD 100 cents
+
+23:39:38.228 - DISPLAY: Hi there!
+
+23:39:38.229 - DISPLAY: Hi there!
+
+23:39:38.234 - DISPLAY: Credit: 100
+
+23:39:38.239 - Inserted CAD 100 cents
+
+23:39:38.245 - DISPLAY: Credit: 200
+
+23:39:38.250 - Inserted CAD 100 cents
+
+23:39:38.255 - DISPLAY: Credit: 300
+
+23:39:38.263 - Inserted CAD 100 cents
+
+23:39:38.271 - DISPLAY: Credit: 400
+
+23:39:38.279 - Inserted CAD 100 cents
+
+23:39:38.286 - DISPLAY: Credit: 500
+
+23:39:38.291 - Inserted CAD 100 cents
+
+23:39:38.296 - DISPLAY: Credit: 600
+
+23:39:38.301 - Inserted CAD 100 cents
+
+23:39:38.306 - DISPLAY: Credit: 700
+
+23:39:38.311 - Coin receptacle full
+
+23:39:38.316 - Safety enabled!
+
+23:39:38.321 - Inserted CAD 100 cents
+
+23:39:38.327 - DISPLAY: Credit: 800
+
+23:39:38.333 - DISPLAY: Hi there!
+
+23:39:38.333 - Inserted CAD 200 cents
+
+23:39:38.339 - DISPLAY: Credit: 200
+
+23:39:38.344 - Inserted CAD 200 cents
+
+23:39:38.349 - DISPLAY: Credit: 400
+
+23:39:38.354 - Mountain Dew button at button index 3 pressed
+
+23:39:38.359 - Pop is sold out!
+
+23:39:38.365 - Inserted CAD 200 cents
+
+23:39:38.365 - DISPLAY: Hi there!
+
+23:39:38.371 - DISPLAY: Credit: 200
+
+23:39:38.376 - Inserted CAD 200 cents
+
+23:39:38.382 - DISPLAY: Credit: 400
+
+23:39:38.388 - Pepsi button at button index 1 pressed
+
+23:39:38.396 - Removed a Pepsi
+
+23:39:38.404 - Item Delivered
+
+23:39:38.412 - Delivery chute door opened
+
+23:39:38.420 - Delivery chute door closed
+
+23:39:38.429 - DISPLAY: 
+
+23:51:55.641 - DISPLAY: Hi there!
+
+23:51:55.644 - Inserted CAD 200 cents
+
+23:51:55.652 - DISPLAY: Credit: 200
+
+23:51:55.660 - Mountain Dew button at button index 3 pressed
+
+23:51:55.667 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.677 - Inserted CAD 200 cents
+
+23:51:55.678 - DISPLAY: Hi there!
+
+23:51:55.686 - DISPLAY: Credit: 200
+
+23:51:55.694 - Mountain Dew button at button index 3 pressed
+
+23:51:55.701 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.709 - Mountain Dew button at button index 3 pressed
+
+23:51:55.717 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.725 - Mountain Dew button at button index 3 pressed
+
+23:51:55.733 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.740 - Mountain Dew button at button index 3 pressed
+
+23:51:55.748 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.755 - Mountain Dew button at button index 3 pressed
+
+23:51:55.763 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.771 - Mountain Dew button at button index 3 pressed
+
+23:51:55.783 - DISPLAY: Insufficent credit for purchase
+
+23:51:55.798 - Inserted CAD 200 cents
+
+23:51:55.806 - DISPLAY: Hi there!
+
+23:51:55.807 - DISPLAY: Credit: 200
+
+23:51:55.818 - Inserted CAD 100 cents
+
+23:51:55.818 - DISPLAY: Hi there!
+
+23:51:55.819 - DISPLAY: Hi there!
+
+23:51:55.826 - DISPLAY: Credit: 100
+
+23:51:55.833 - Inserted CAD 100 cents
+
+23:51:55.840 - DISPLAY: Credit: 200
+
+23:51:55.845 - Inserted CAD 100 cents
+
+23:51:55.851 - DISPLAY: Credit: 300
+
+23:51:55.856 - Inserted CAD 100 cents
+
+23:51:55.861 - DISPLAY: Credit: 400
+
+23:51:55.867 - Inserted CAD 100 cents
+
+23:51:55.872 - DISPLAY: Credit: 500
+
+23:51:55.877 - Inserted CAD 100 cents
+
+23:51:55.882 - DISPLAY: Credit: 600
+
+23:51:55.887 - Inserted CAD 100 cents
+
+23:51:55.892 - DISPLAY: Credit: 700
+
+23:51:55.898 - Coin receptacle full
+
+23:51:55.903 - Out of order light turned on
+
+23:51:55.908 - Safety enabled!
+
+23:51:55.913 - Inserted CAD 100 cents
+
+23:51:55.918 - DISPLAY: Credit: 800
+
+23:51:55.925 - Inserted CAD 200 cents
+
+23:51:55.925 - DISPLAY: Hi there!
+
+23:51:55.930 - DISPLAY: Credit: 200
+
+23:51:55.935 - Inserted CAD 200 cents
+
+23:51:55.941 - DISPLAY: Credit: 400
+
+23:51:55.946 - Mountain Dew button at button index 3 pressed
+
+23:51:55.952 - Pop is sold out!
+
+23:51:55.958 - Inserted CAD 200 cents
+
+23:51:55.958 - DISPLAY: Hi there!
+
+23:51:55.964 - DISPLAY: Credit: 200
+
+23:51:55.970 - Inserted CAD 200 cents
+
+23:51:55.976 - DISPLAY: Credit: 400
+
+23:51:55.983 - Pepsi button at button index 1 pressed
+
+23:51:55.993 - Removed a Pepsi
+
+23:51:55.999 - Item Delivered
+
+23:51:56.007 - Delivery chute door opened
+
+23:51:56.014 - Delivery chute door closed
+
+23:51:56.020 - 200coin has been added to its rack
+
+23:51:56.026 - 200coin has been added to its rack
+
+23:51:56.033 - DISPLAY: 
+
