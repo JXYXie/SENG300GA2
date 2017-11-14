@@ -304,7 +304,7 @@ public class VMLogicTester {
 	public void testEventpopcanchuteFull() throws CapacityExceededException, DisabledException {
 		
 		PopCan popCan = new PopCan("Water");
-		for(int i =0; i < 199; i++)
+		for(int i =0; i < 8; i++)
 		{
 			vm.getDeliveryChute().acceptPopCan(popCan);
 		}
@@ -394,7 +394,7 @@ public class VMLogicTester {
 		assertEquals(0,vml.getCredit());
 		//vml.displayHi();
 		
-		assertEquals("Hi there!",vDL.newMessage);
+		assertEquals("Hi there!",vDL.oldMessage);
 		
 	}
 	
@@ -407,8 +407,8 @@ public class VMLogicTester {
 		String event = "NotZero";
 		vml.addCredit(50);
 		assertEquals(50,vml.getCredit());
-		//vml.displayCredit();
-		assertEquals(event,vDL.newMessage);
+		vml.displayCredit();
+		assertEquals(event,vDL.oldMessage);
 	}
 	
 	//TODO vml.display(credit);
@@ -433,7 +433,7 @@ public class VMLogicTester {
 		vml.addCredit(50);
 		assertEquals(50,vml.getCredit());
 		vml.display(event);
-		assertEquals(event,vl.getEvent());
+		assertEquals(event,vDL.newMessage);
 	}
 	
 	//Completely skips the branch to notify all
