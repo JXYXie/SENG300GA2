@@ -1,9 +1,18 @@
-/****************************************************
+/**********************************************************
  * SENG 300 Group Assignment 2
+ * Main logic class
+ * @author Xin Yan (Jack) Xie
+ * @author Jacky Wu
+ * @author Sara Strand
+ * @author Jaskaran Sidhu
+ * @author Siddharth Kataria
+ * @author Steffen Gerdes
+ * @author Sheldon Birch-Lucas
  * This class handles all the logic operations that occur in a vending machine,
- * specifically, this class handles the calling of methods when money is inserted
- * and buttons are pressed as well as the listening of their respective events
- ****************************************************/
+ * specifically, this class handles any transactions and vending operations: 
+ * i.e. coins are inserted, buttons get pressed, pop gets vended, change is returned, etc
+ * Registers all the listeners of the hardware
+ **********************************************************/
 package ca.ucalgary.seng300.VendingMachineLogic;
 
 import java.util.ArrayList;
@@ -20,17 +29,16 @@ import org.lsmr.vending.hardware.*;
 public class VendingMachineLogic {
 
 	private VendingMachine vm;
-	
 	private VendingListener vlistener;
 	
 	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+	private ScheduledFuture<?> beeperHandle;
 	private EventLogger logger;
 	
 	private List<PushButton> buttonList = new ArrayList<>();
-	private ScheduledFuture<?> beeperHandle;
 	private int userCredit;
-	private String currency = "CAD";
-	private String event;
+	private String currency = "CAD"; //Current currency format, can be changed i.e. USD
+	private String event; //This is used to pass to display and log file when necessary
 
 	/********************
 	 * Constructor

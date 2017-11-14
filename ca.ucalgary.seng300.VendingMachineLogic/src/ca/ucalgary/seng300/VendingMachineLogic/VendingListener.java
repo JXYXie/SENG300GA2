@@ -1,7 +1,14 @@
+/**********************************************************
+ * SENG 300 Group Assignment 2
+ * Vending machine listener class
+ * This class contains all the listeners for the various hardware
+ * It handles events and listens for them when events are announced
+ * This is important not only for logic reasons but also for the displaying
+ * and logging of events
+ **********************************************************/
 package ca.ucalgary.seng300.VendingMachineLogic;
 
 import java.util.Arrays;
-
 import org.lsmr.vending.Coin;
 import org.lsmr.vending.PopCan;
 import org.lsmr.vending.hardware.*;
@@ -14,9 +21,14 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	
 	private String event;
 	
+	/**
+	 * Constructor which passes in VendingMachine and VendingMachingLogic objects to be initialized
+	 * @param vm
+	 * @param vml
+	 */
 	public VendingListener(VendingMachine vm, VendingMachineLogic vml) {
-		this.vm = vm;
-		this.vml = vml;
+		this.vm = vm; //passes vending machine object
+		this.vml = vml; //and vending machine logic object
 	}
 	
 	@Override
@@ -46,24 +58,35 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	
 	
 	/***********************************Start CoinRack Listener**************************************/
+	/**
+	 * When a coin rack is full
+	 */
 	@Override
 	public void coinsFull(CoinRack rack) {
 		event = "A coin rack is full";
 		vml.log(event);
 	}
-
+	/**
+	 * When a coin rack is empty
+	 */
 	@Override
 	public void coinsEmpty(CoinRack rack) {
 		event = "A coin rack is empty";
 		vml.log(event);
 	}
 
+	/**
+	 * A coin gets added to its coin rack
+	 */
 	@Override
 	public void coinAdded(CoinRack rack, Coin coin) {
 		event = coin.getValue() + " cent coin has been added to its rack";
 		vml.log(event);
 	}
 
+	/**
+	 * A coin gets removed from its coin rack
+	 */
 	@Override
 	public void coinRemoved(CoinRack rack, Coin coin) {
 		event = coin.getValue() + "coin has been removed from its rack";
@@ -114,13 +137,14 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	public void returnIsFull(CoinReturn coinReturn) {
 		event = "Coin return is full";
 		vml.log(event);
-		vml.enableSafety();
+		vml.enableSafety(); //enables safety if there is no more space in the coin return receptacle
 	}
 	/*****************************End CoinReturn Listener*********************************/
-	/*********************************Start Button Listener*****************************************/
 	
+	
+	/*********************************Start Button Listener*****************************************/
 	/***************************************************
-	 * Handles the logic of selection buttons
+	 * Handles the logic of push buttons
 	 **************************************************/
 	@Override
 	public void pressed(PushButton button) {
@@ -128,22 +152,22 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 		int btnIndex = vml.getButtonList().indexOf(button) ; //Which button did the user press
 		
 		event = vm.getPopKindName(btnIndex) + " button at button index " + btnIndex + " pressed";
-		vml.log(event);
+		vml.log(event); //now log the button press event to file
 		
 		if (btnIndex == -1) { //Unregistered button is pressed
 			//Nothing happens for now
-		} else {
+		} else { //Valid button gets pressed
 			try {
-				vml.buy(btnIndex);
-			} catch (DisabledException e) {
+				vml.buy(btnIndex); //Calls the buy transaction method
+			} catch (DisabledException e) { //Vending machine is disabled
 				event = "The vending machine is currently disabled!";
 				vml.display(event);
 				vml.enableSafety();
-			} catch (CapacityExceededException e) {
+			} catch (CapacityExceededException e) { //Chute becomes full
 				event = "The delivery chute is full!";
 				vml.display(event);
 				vml.enableSafety();
-			} catch (EmptyException e) {
+			} catch (EmptyException e) { //Or pop is sold out
 				event = vm.getPopKindName(btnIndex)+ " is sold out!";
 				vml.display(event);
 			}
@@ -163,7 +187,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	//Removing PopCan from PopCanRack
 	@Override
 	public void popCanRemoved(PopCanRack popCanRack, PopCan popCan) {
-		event = "Removed a " + popCan.getName() + "from its rack";
+		event = "Removed a " + popCan.getName() + " from its rack";
 		vml.log(event);
 	}
 
