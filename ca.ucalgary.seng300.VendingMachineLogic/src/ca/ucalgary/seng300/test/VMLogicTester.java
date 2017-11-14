@@ -66,18 +66,17 @@ public class VMLogicTester {
 	}
 	
 	//Invalid coin insertion
-	/*
+	
 	@Test
 	public void test2() throws Exception {
 		Coin fiver = new Coin(500);
-		
 		vm.getCoinSlot().addCoin(fiver);
-	}*/
+		assertEquals(vml.getCredit(), 0);
+	}
 	
 	//Test to check when you attempt to purchase a something that is not in stock
 	@Test
 	public void test3() throws DisabledException, EmptyException {
-		
 		Coin toonie = new Coin(200);
 		
 		vm.getPopCanRack(3).unload();
@@ -86,10 +85,11 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(toonie);
 		
 		vm.getSelectionButton(3).press();
+		assertEquals(vm.getDeliveryChute().size(), 0);
 	}
 	
 	//Testing for when the coin receptacle becomes full
-	/*
+	
 	@Test
 	public void test4() throws DisabledException, CapacityExceededException {
 		Coin loonie = new Coin(100);		
@@ -97,11 +97,14 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-	}*/
+		assertTrue(!(vm.getCoinReceptacle().hasSpace()));
+		try {
+			vm.getCoinSlot().addCoin(loonie);
+		}
+		catch (DisabledException e){
+			fail("purposely failed test to make sure catch block ran");
+		} 
+	}
 	
 	//attempting to purchase with insufficient credits
 	@Test
@@ -109,6 +112,7 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
+		assertEquals(vm.getDeliveryChute().size(), 0);
 	}
 	
 	/***************************************************
