@@ -136,13 +136,16 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 			try {
 				vml.buy(btnIndex);
 			} catch (DisabledException e) {
-				vml.display("The vending machine is currently disabled!");
+				event = "The vending machine is currently disabled!";
+				vml.display(event);
 				vml.enableSafety();
 			} catch (CapacityExceededException e) {
-				vml.display("The delivery chute is full!");
+				event = "The delivery chute is full!";
+				vml.display(event);
 				vml.enableSafety();
 			} catch (EmptyException e) {
-				vml.display(vm.getPopKindName(btnIndex)+ " is sold out!");
+				event = vm.getPopKindName(btnIndex)+ " is sold out!";
+				vml.display(event);
 			}
 		}
 	}
@@ -189,9 +192,9 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	@Override
 	public void itemDelivered(DeliveryChute chute) {
 		//Simulates opening the chute for the customer
-		event = "Item Delivered";
+		PopCan[] popcans = chute.removeItems();
+		event = "Delivered " + Arrays.toString(popcans);
 		vml.log(event);
-		chute.removeItems();
 	}
 
 	@Override

@@ -75,7 +75,8 @@ public class VendingMachineLogic {
 		int cost = vm.getPopKindCost(btnIndex);
 		
 		if (cost > userCredit) { //not enough money
-			display("Insufficient credit: " + (cost - userCredit) + " cents short");
+			event = "Insufficient credit: " + (cost - userCredit) + " cents short";
+			display(event);
 		} else { //enough money
 			vm.getPopCanRack(btnIndex).dispensePopCan(); //dispenses the pop
 			vm.getCoinReceptacle().storeCoins(); //store the coins
@@ -198,6 +199,7 @@ public class VendingMachineLogic {
 	
 	public void log(String line) {
 		logger.log(line);
+		this.event = line;
 	}
 	/**
 	 * @return the currency type
