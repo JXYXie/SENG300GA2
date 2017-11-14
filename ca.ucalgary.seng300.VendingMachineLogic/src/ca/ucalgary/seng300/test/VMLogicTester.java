@@ -127,5 +127,9 @@ public class VMLogicTester {
 		vm.getSelectionButton(1).press();
 	}
 
-
+	public void noExactChange() throws DisabledException, SimulationException{
+		
+		vml.addCredit(273);
+		vm.getSelectionButton(1).press();
+	}
 }

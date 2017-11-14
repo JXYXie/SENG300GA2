@@ -167,10 +167,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the corresponding pop rack
 			try {
 				pr.dispensePopCan(); //Dispenses the relevant pop
-				vm.getCoinReceptacle().storeCoins(); //Stores the change
-				userCredit -= cost; //Deduct the pay from the available credit
-				vm.getCoinReceptacle().returnCoins();
-				display("");
+				buy(cost);
 			} catch (DisabledException | CapacityExceededException e) {
 				throw new SimulationException(e);
 			} catch (EmptyException e2) {
@@ -178,6 +175,13 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 				logger.log(event);
 			}
 		}
+	}
+	
+	private void buy(int cost) throws CapacityExceededException, DisabledException {
+		vm.getCoinReceptacle().storeCoins(); //Stores the change
+		userCredit = giveChange(cost); //
+		vm.getCoinReceptacle().returnCoins();
+		display("");
 	}
 	
 	/**********************************End Button Listener*****************************************/
@@ -284,8 +288,8 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		
 		if (userCredit > 0) { //if there is still credit in the vending machine
 			resetTimer();
-			vm.getDisplay().display(event);
 			if (event != null)
+				vm.getDisplay().display(event);
 				logger.log("DISPLAY: " + event);
 		}
 		else { //credit is 0
@@ -314,7 +318,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	 */
 	public int giveChange(int cost)	{
 		int credit = userCredit;
-		if (cost - credit == 0)
+		if (credit - cost == 0)
 			return 0;
 		int finalChange = 0;
 		while (finalChange < credit) {
