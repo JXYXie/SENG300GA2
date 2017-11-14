@@ -306,6 +306,38 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 			}, 0, 15000);
 		}
 	}
+	/***************************** Change Functions ********************************************/
+	/**
+	 * Method to give back change to user
+	 * @param cost price of dispensed pop
+	 * @return final credit
+	 */
+	public int giveChange(int cost)	{
+		int credit = userCredit;
+		if (cost - credit == 0)
+			return 0;
+		int finalChange = 0;
+		while (finalChange < credit) {
+			for (int i = 0; i < vm.getNumberOfCoinRacks(); i++) 
+				finalChange += vm.getCoinRack(i).getCapacity()*vm.getCoinRack(i).size();
+		}
+		credit = credit - finalChange;
+		return credit;
+	}
+	
+	/**
+	 * Method to check if possibility
+	 * of exact change is low
+	 */
+	public void lowChange()  {
+		int change = 0;
+		for (int i = 0; i < 2; i++)	//checking for the two lowest coin valued CoinRacks  
+			change += vm.getCoinRack(i).size()*vm.getCoinRack(i).size();
+		if (change < 200) //Arbitrarily $2
+			vm.getExactChangeLight().activate();
+		else
+			vm.getExactChangeLight().deactivate();
+		}
 	
 	private void resetTimer() {
 		timer.cancel();
@@ -351,5 +383,5 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	public int getCredit() {
 		return userCredit;
 	}
-	
+
 }
