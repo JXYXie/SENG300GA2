@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="ca.ucalgary.seng300.VendingMachineLogic/src"/>
+	<classpathentry excluding="ca/ucalgary/seng300/VendingMachineLogic/CoinListener.java|ca/ucalgary/seng300/test/Test1.java" kind="src" path="ca.ucalgary.seng300.VendingMachineLogic/src"/>
 	<classpathentry kind="src" path="org.lsmr.vending2/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="ca.ucalgary.seng300.VendingMachineLogic/bin"/>

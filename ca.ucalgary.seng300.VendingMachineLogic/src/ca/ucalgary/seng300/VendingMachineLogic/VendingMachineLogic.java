@@ -7,23 +7,30 @@
 package ca.ucalgary.seng300.VendingMachineLogic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
-import org.lsmr.vending.*;
+import static java.util.concurrent.TimeUnit.*;
+
 import org.lsmr.vending.hardware.*;
 
-public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, CoinReceptacleListener, 
-	PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightListener {
+public class VendingMachineLogic {
 
 	private VendingMachine vm;
+	
+	private VendingListener vlistener;
+	
+	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	private EventLogger logger;
-	private Timer timer = new Timer();
-	private int userCredit;
+	
 	private List<PushButton> buttonList = new ArrayList<>();
+	private ScheduledFuture<?> beeperHandle;
+	private int userCredit;
+	private String currency = "CAD";
 	private String event;
-	private String currency;
 
 	/********************
 	 * Constructor
@@ -33,319 +40,134 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	public VendingMachineLogic(VendingMachine vm) {
 		
 		this.vm = vm;
+		vlistener = new VendingListener(vm, this);
 		logger = new EventLogger();
 		
-		userCredit = 0;
-		currency = "CAD";
-		
-		//For loop to iterate through all the available buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
 			PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
-			sb.register(this); //And registers the relevant listeners
+			sb.register(vlistener); //And registers the relevant listeners
 			buttonList.add(sb); //Stores into an ArrayList for later use
 		}
+		
 		//Iterate through all available pop can racks
 		for (int i = 0; i < vm.getNumberOfPopCanRacks(); i++) {
-			PopCanRack pcr = vm.getPopCanRack(i);
-			pcr.register(this); //Registers the relevant listeners
+			vm.getPopCanRack(i).register(vlistener); //Registers the relevant listeners
 		}
+		
 		//Iterate through all available coin racks
 		for (int i = 0; i < vm.getNumberOfCoinRacks(); i++) {
-			vm.getCoinRack(i).register(this); //Registers the relevant listeners
+			vm.getCoinRack(i).register(vlistener); //Registers the relevant listeners
 		}
 		
 		//Now register all the rest of the listeners
-		vm.getCoinSlot().register(this);
-		vm.getDeliveryChute().register(this);
-		vm.getCoinReceptacle().register(this);
-		//TODO implement methods first before registering or else program wont run properly
-		vm.getOutOfOrderLight().register(this);
-		vm.getExactChangeLight().register(this);
-		display(""); //Display looping message at beginning
-	}
-
-	@Override
-	public void enabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {}
-
-	@Override
-	public void disabled(AbstractHardware<? extends AbstractHardwareListener> hardware) {}
-	
-	/*******************************Start CoinSlot Listener*************************************/
-	//When a valid coin is inserted into the vending machine
-	@Override
-	public void validCoinInserted(CoinSlot slot, Coin coin) {
-		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
-		event = "Inserted " + currency + " " + coin.getValue() + " cents"; //Updates event for coin insertion
-		logger.log(event); //Now logs that event
-		event = "Credit: " + userCredit; //Updates event for the display
-		display(event); //Displays the current credit for and logs it to file
-	}
-	//Rejects an invalid coin
-	@Override
-	public void coinRejected(CoinSlot slot, Coin coin) {
-		event = "Invalid coin inserted";
-		logger.log(event);
-	}
-	/*******************************End CoinSlot Listener*************************************/
-	
-	/***********************************Start CoinRack Listener**************************************/
-	@Override
-	public void coinsFull(CoinRack rack) {
-		event = "A coin rack is full";
-		logger.log(event);
-	}
-
-	@Override
-	public void coinsEmpty(CoinRack rack) {
-		event = "A coin rack is empty";
-		logger.log(event);
-	}
-
-	@Override
-	public void coinAdded(CoinRack rack, Coin coin) {
-		event = coin.getValue() + "coin has been added to its rack";
-		logger.log(event);
-	}
-
-	@Override
-	public void coinRemoved(CoinRack rack, Coin coin) {
-		event = coin.getValue() + "coin has been removed from its rack";
-		logger.log(event);
-	}
-
-	@Override
-	public void coinsLoaded(CoinRack rack, Coin... coins) {}
-
-	@Override
-	public void coinsUnloaded(CoinRack rack, Coin... coins) {}
-	/***********************************End CoinRack Listener**************************************/
-	
-	
-	/******************************Start CoinReceptacle Listener******************************/
-	@Override
-	public void coinAdded(CoinReceptacle receptacle, Coin coin) {}
-
-	@Override
-	public void coinsRemoved(CoinReceptacle receptacle) {}
-
-	@Override
-	public void coinsFull(CoinReceptacle receptacle) {
-		event = "Coin receptacle full";
-		logger.log(event);
-		enableSafety();
-	}
-
-	@Override
-	public void coinsLoaded(CoinReceptacle receptacle, Coin... coins) {}
-
-	@Override
-	public void coinsUnloaded(CoinReceptacle receptacle, Coin... coins) {}
-	/******************************End CoinReceptacle Listener******************************/
-	
-	/*********************************Start Button Listener*****************************************/
-	
-	/***************************************************
-	 * Handles the logic of selection buttons
-	 **************************************************/
-	@Override
-	public void pressed(PushButton button) {
-
-		int btnIndex = buttonList.indexOf(button) ; //Which button did the user press
+		vm.getCoinSlot().register(vlistener);
+		vm.getDeliveryChute().register(vlistener);
+		vm.getCoinReceptacle().register(vlistener);
+		vm.getOutOfOrderLight().register(vlistener);
+		vm.getExactChangeLight().register(vlistener);
 		
-		event = vm.getPopKindName(btnIndex) + " button at button index " + btnIndex + " pressed";
-		logger.log(event);
-		if (btnIndex == -1) { //Unregistered button is pressed
-			//Nothing happens for now
-		}
-
+		userCredit = 0;
+		displayCredit(); //Display looping message at beginning since credit is 0
+	}
+	
+	public void buy(int btnIndex) throws DisabledException, CapacityExceededException, EmptyException {
+		
 		int cost = vm.getPopKindCost(btnIndex);
-
-		if (cost > userCredit) { //Not enough money!!!
-			event = "Insufficent credit for purchase"; //Updates message
-			display(event);
-		} else {
-			PopCanRack pr = vm.getPopCanRack(btnIndex); //Matches the button with the corresponding pop rack
-			try {
-				pr.dispensePopCan(); //Dispenses the relevant pop
-				buy(cost);
-			} catch (DisabledException | CapacityExceededException e) {
-				throw new SimulationException(e);
-			} catch (EmptyException e2) {
-				event = "Pop is sold out!"; //Set the event for sold-out
-				logger.log(event);
+		
+		if (cost > userCredit) { //not enough money
+			display("Insufficient credit: " + (cost - userCredit) + " cents short");
+		} else { //enough money
+			vm.getPopCanRack(btnIndex).dispensePopCan(); //dispenses the pop
+			vm.getCoinReceptacle().storeCoins(); //store the coins
+			userCredit -= cost; //update the new credit
+			returnChange(); //return the remaining change if there is any
+			displayCredit(); //display the credit or if credit is 0 display greeting message
+		}
+	}
+	/******************************** Change Functions ********************************************/
+	
+	/**
+	 * Returns the change (could be exact or not exact)
+	 * Algorithm will always return the highest value coin when possible
+	 * @throws DisabledException
+	 * @throws CapacityExceededException
+	 * @throws EmptyException 
+	 */
+	public void returnChange() throws DisabledException, CapacityExceededException, EmptyException{
+		
+		int coin;
+		int[] coinValues = new int[vm.getNumberOfCoinRacks()]; //array of the number of coin racks
+		CoinRack returnRack;
+		
+		for (int i = 0; i < vm.getNumberOfCoinRacks(); i++ ) { //goes through all the coin racks
+			coinValues[i] = vm.getCoinKindForCoinRack(i); //and gets all the coin values
+		}
+		Arrays.sort(coinValues); //then sort it in ascending order
+		
+		for (int i = (vm.getNumberOfCoinRacks() - 1); i >= 0 ; i-- ) { //reverse from biggest value to smallest
+			coin = coinValues[i];
+			returnRack = vm.getCoinRackForCoinKind(coin); //gets the rack we are returning
+			
+			if (userCredit == 0) //break out of the loop if the credit is 0
+				break;
+			
+			while ((userCredit >= coin) && (returnRack.size() > 0)) {
+				returnRack.releaseCoin();
+				addCredit(-coin);
 			}
 		}
-	}
-	
-	private void buy(int cost) throws CapacityExceededException, DisabledException {
-		vm.getCoinReceptacle().storeCoins(); //Stores the change
-		userCredit = giveChange(cost); //
-		vm.getCoinReceptacle().returnCoins();
-		display("");
-	}
-	
-	/**********************************End Button Listener*****************************************/
-	
-	/********************************Start PopCanRack Listener*************************************/
-	//Adding PopCan to PopCanRack
-	@Override
-	public void popCanAdded(PopCanRack popCanRack, PopCan popCan) {
-		event = "Added " + popCan.getName();
-		logger.log(event);
-	}
-	//Removing PopCan from PopCanRack
-	@Override
-	public void popCanRemoved(PopCanRack popCanRack, PopCan popCan) {
-		event = "Removed a " + popCan.getName();
-		logger.log(event);
-	}
-
-	@Override
-	public void popCansLoaded(PopCanRack rack, PopCan... popCans) {
-		//Leave empty
-	}
-
-	@Override
-	public void popCansUnloaded(PopCanRack rack, PopCan... popCans) {
-		//Leave empty
-	}
-
-	@Override
-	public void popCansFull(PopCanRack popCanRack) {
-		event = "Pop can rack full";
-		logger.log(event);
-	}
-
-	@Override
-	public void popCansEmpty(PopCanRack popCanRack) {
-		event = "Pop can rack empty";
-		logger.log(event);
-	}
-	
-	/*******************************End PopCanRack Listener*************************************/
-	
-	/********************************Start DeliveryChute Listener********************************/
-	@Override
-	public void itemDelivered(DeliveryChute chute) {
-		//Simulates opening the chute for the customer
-		event = "Item Delivered";
-		logger.log(event);
-		chute.removeItems();
 		
-	}
-
-	@Override
-	public void doorOpened(DeliveryChute chute) {
-		event = "Delivery chute door opened";
-		logger.log(event);
-	}
-
-	@Override
-	public void doorClosed(DeliveryChute chute) {
-		event = "Delivery chute door closed";
-		logger.log(event);
-	}
-
-	@Override
-	public void chuteFull(DeliveryChute chute) {
-		event = "Delivery chute door full";
-		logger.log(event);
-		enableSafety(); //enables the safety
-		
-	}
-	/******************************End DeliveryChute Listener********************************/
-	
-	/******************************Start IndicatorLight Listener********************************/
-	/**
-	 * Indicator light behaviour
-	 * Toggles the lights and logs the relevant actions
-	 */
-	@Override
-	public void activated(IndicatorLight light) {
-		if (light == vm.getExactChangeLight()) {
-			event = "Exact change only light turned on";
-		}
-		else if (light == vm.getOutOfOrderLight()) {
-			event = "Out of order light turned on";
-		}
-		logger.log(event);
-	}
-
-	@Override
-	public void deactivated(IndicatorLight light) {
-		if (light == vm.getExactChangeLight()) {
-			event = "Exact change only light turned off";
-		}
-		else if (light == vm.getOutOfOrderLight()) {
-			event = "Out of order light turned off";
-		}
-		logger.log(event);		
-	}
-	/********************************End IndicatorLight Listener*********************************/
-	
-	//TODO More testing somewhat broken
-	public void display(String event) {
-		
-		if (userCredit > 0) { //if there is still credit in the vending machine
-			resetTimer();
-			if (event != null)
-				vm.getDisplay().display(event);
-				logger.log("DISPLAY: " + event);
-		}
-		else { //credit is 0
-			String noCreditEvent = "Hi there!";
-			resetTimer();
-			timer.scheduleAtFixedRate(new TimerTask() {
-				@Override
-				public void run() {
-					vm.getDisplay().display(noCreditEvent);
-					logger.log("DISPLAY: " + noCreditEvent);
-				}
-			}, 0, 5000);
-			timer.scheduleAtFixedRate(new TimerTask() {
-				@Override
-				public void run() {
-					vm.getDisplay().display("");
-				}
-			}, 0, 15000);
-		}
-	}
-	/***************************** Change Functions ********************************************/
-	/**
-	 * Method to give back change to user
-	 * @param cost price of dispensed pop
-	 * @return final credit
-	 */
-	public int giveChange(int cost)	{
-		int credit = userCredit;
-		if (credit - cost == 0)
-			return 0;
-		int finalChange = 0;
-		while (finalChange < credit) {
-			for (int i = 0; i < vm.getNumberOfCoinRacks(); i++) 
-				finalChange += vm.getCoinRack(i).getCapacity()*vm.getCoinRack(i).size();
-		}
-		credit = credit - finalChange;
-		return credit;
-	}
-	
-	/**
-	 * Method to check if possibility
-	 * of exact change is low
-	 */
-	public void lowChange()  {
-		int change = 0;
-		for (int i = 0; i < 2; i++)	//checking for the two lowest coin valued CoinRacks  
-			change += vm.getCoinRack(i).size()*vm.getCoinRack(i).size();
-		if (change < 200) //Arbitrarily $2
+		if (userCredit != 0) { //if there is still money left in the vending machine that means there is not enough change for the user
 			vm.getExactChangeLight().activate();
-		else
+		} else {
 			vm.getExactChangeLight().deactivate();
 		}
+		
+	}
 	
-	private void resetTimer() {
-		timer.cancel();
-		timer = new Timer();
+	/******************************** Display Functions ********************************************/
+	public void display(String event) {
+		if (event != null) {
+			vm.getDisplay().display(event);
+			log("DISPLAY: " + event);
+		}
+	}
+	/**
+	 * Displays the hi greeting prompt every second for 5 seconds
+	 * 
+	 */
+	public void displayHi() {
+		
+		String prompt = "Hi there!";
+		final Runnable looper = new Runnable() {
+			@Override
+			public void run() {
+				display(prompt);
+			}
+		};
+		
+		beeperHandle = scheduler.scheduleAtFixedRate(looper, 0, 1, SECONDS);
+		
+		scheduler.schedule(new Runnable() {
+			@Override
+			public void run() { beeperHandle.cancel(true); }
+		     }, 5, SECONDS);
+	}
+	/**
+	 * Displays current credit but if it is 0 call displayHi()
+	 */
+	public void displayCredit() {
+		
+		if (userCredit > 0) {
+			display("Credit: " + userCredit);
+			resetTimer();
+		} else {
+			displayHi();
+		}
+	}
+	
+	public void resetTimer() {
+		beeperHandle.cancel(true);
 	}
 	
 	/**
@@ -354,7 +176,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	void enableSafety() {
 		vm.enableSafety();
 		event = "Safety enabled!";
-		logger.log(event);
+		log(event);
 	}
 	
 	/**
@@ -363,14 +185,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	void disableSafety() {
 		vm.disableSafety();
 		event = "Safety disabled!";
-		logger.log(event);
-	}
-	
-	/**
-	 * @param amount of credit to be added
-	 */
-	public void addCredit(int amount) {
-		userCredit += amount;
+		log(event);
 	}
 	
 	/**
@@ -381,11 +196,35 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 		return event;
 	}
 	
+	public void log(String line) {
+		logger.log(line);
+	}
+	/**
+	 * @return the currency type
+	 */
+	public String getCurrency() {
+		return currency;
+	}
+	
+	/**
+	 * @param amount of credit to be added
+	 */
+	public void addCredit(int amount) {
+		userCredit += amount;
+	}
+	
 	/**
 	 * @return how much credit is in vending machine
 	 */
 	public int getCredit() {
 		return userCredit;
+	}
+	
+	/**
+	 * @return the list of buttons
+	 */
+	public List<PushButton> getButtonList() {
+		return buttonList;
 	}
 
 }

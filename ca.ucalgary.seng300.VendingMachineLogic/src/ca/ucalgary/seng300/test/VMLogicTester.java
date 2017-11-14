@@ -10,9 +10,7 @@ import org.junit.Test;
 
 import ca.ucalgary.seng300.VendingMachineLogic.*;
 import org.lsmr.vending.Coin;
-import org.lsmr.vending.hardware.DisabledException;
-import org.lsmr.vending.hardware.SimulationException;
-import org.lsmr.vending.hardware.VendingMachine;
+import org.lsmr.vending.hardware.*;
 
 import org.junit.Test;
 
@@ -24,11 +22,11 @@ public class VMLogicTester {
 		
 		int[] coinKinds = {5, 10, 25, 100, 200}; //Nickels, dimes, quarters, loonies, toonies (all values in cents)
 		int btnCount = 6; //6 types of pop
-		int coinRackCapacity = 5;
+		int coinRackCapacity = 4;
 		int popRackCapacity = 10;
-		int receptacleCapacity = 8;
+		int receptacleCapacity = 4;
 		int deliveryChuteCapacity = 10;
-		int coinReturnCapacity = 10;
+		int coinReturnCapacity = 8;
 		
 		vm = new VendingMachine(coinKinds, btnCount, coinRackCapacity, popRackCapacity, receptacleCapacity, deliveryChuteCapacity, coinReturnCapacity);
 		vml = new VendingMachineLogic(vm);
@@ -49,27 +47,42 @@ public class VMLogicTester {
 		}
 		
 		vm.configure(popNames, costs);
-		vm.loadPopCans(5, 4, 0, 0, 5, 5); //Starts with 5 of each kind of pop
+		vm.loadPopCans(5, 5, 5, 5, 5, 5); //Starts with 5 of each kind of pop
 	}
+	
+	//Purchase normally
+	@Test
+	public void test1() throws DisabledException {
+		Coin toonie = new Coin(200);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getSelectionButton(1).press();
+	}
+	
+	//Invalid coin insertion
+	@Test
+	public void test2() throws Exception {
+		Coin fiver = new Coin(500);
+		vm.getCoinSlot().addCoin(fiver);
+	}
+	
 	//Test to check when you attempt to purchase a something that is not in stock
 	@Test
-	public void notInstock() throws DisabledException, SimulationException {
-
+	public void test3() throws DisabledException, EmptyException {
+		
 		Coin toonie = new Coin(200);
+		
+		vm.getPopCanRack(3).unload();
+		
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
 		
 		vm.getSelectionButton(3).press();
 	}
-	@Test
-	public void popcanUnload() throws DisabledException, SimulationException {
-
-		
-	}
 	
-	//Testing for coinrackFull
+	//Testing for when the coin receptacle becomes full
 	@Test
-	public void nonValidCoin() throws DisabledException, SimulationException {
+	public void test4() throws DisabledException, CapacityExceededException {
 		Coin loonie = new Coin(100);		
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
@@ -79,57 +92,14 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
-
-
-	}
-	//attempting to purchase with sufficient credits
-	@Test
-	public void insufficientC() throws DisabledException, SimulationException {
-		Coin toonie = new Coin(200);
-		vm.getCoinSlot().addCoin(toonie);
-		vm.getSelectionButton(3).press();
-		
 	}
 	
-	//removing coins 
+	//attempting to purchase with insufficient credits
 	@Test
-	public void invalidCoin() throws DisabledException, SimulationException {
-		Coin toonie = new Coin(200);
-		vm.getCoinSlot().addCoin(toonie);
-		vm.getCoinReturn();
-		
-	}
-	//Adding popCanFull
-	@Test
-	public void addCan() throws DisabledException, SimulationException{
-		vm.getPopCanRack(0).unload();
-		vm.getPopCanRack(1).unload();
-		vm.getPopCanRack(2).unload();
-		vm.getPopCanRack(3).unload();
-		vm.getPopCanRack(4).unload();
-		vm.getPopCanRack(5).unload();
+	public void test5() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
-		vm.getSelectionButton(3).press();
-		vm.getSelectionButton(3).press();
-		vm.getSelectionButton(3).press();
-		vm.getSelectionButton(3).press();
-		vm.getSelectionButton(3).press();
-		
 	}
-	//purchase normally
-	@Test
-	public void normPurchase() throws DisabledException, SimulationException{
-		Coin toonie = new Coin(200);
-		vm.getCoinSlot().addCoin(toonie);
-		vm.getCoinSlot().addCoin(toonie);
-		vm.getSelectionButton(1).press();
-	}
-
-	public void noExactChange() throws DisabledException, SimulationException{
-		
-		vml.addCredit(273);
-		vm.getSelectionButton(1).press();
-	}
+	
 }
