@@ -232,4 +232,8 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 		event = newMessage;
 	}
 	/******************************End Display Listener********************************/
+
+	public String getEvent() {
+		return event;
+	}
 }
