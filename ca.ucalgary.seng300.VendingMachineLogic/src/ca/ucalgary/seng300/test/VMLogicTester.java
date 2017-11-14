@@ -32,7 +32,7 @@ public class VMLogicTester {
 		
 		vm = new VendingMachine(coinKinds, btnCount, coinRackCapacity, popRackCapacity, receptacleCapacity, deliveryChuteCapacity, coinReturnCapacity);
 		vml = new VendingMachineLogic(vm);
-		vl = new VendingListener(vm,vml);
+		vl = vml.getListener();
 		
 		
 		List<String> popNames = new ArrayList<String>(); //List of pop names
@@ -148,7 +148,7 @@ public class VMLogicTester {
 	
 	@Test
 	public void testdeliveryChuteCapacity() {
-		assertEquals(10,vm.getDeliveryChute().getCapacity());
+		assertEquals(4,vm.getDeliveryChute().getCapacity());
 	}
 	
 	
@@ -210,19 +210,16 @@ public class VMLogicTester {
 		}
 		
 	}
-	//Load coins
-//	@Test(expected = CapacityExceededException.class)
-//	public void testEventCoinsFull() throws CapacityExceededException, DisabledException {
-//		Coin Coin = new Coin(200);
-//		for(int i =0; i < 39; i++)
-//		{
-//			vm.getCoinReceptacle().load(Coin,Coin,Coin,Coin,Coin);
-//		}
-//		vm.getCoinReceptacle().load(Coin,Coin,Coin,Coin);
-//		vm.getCoinReceptacle().acceptCoin(Coin);
-//		assertEquals("Coin receptacle full",vl.getEvent());
-//		
-//	}
+	
+	@Test(expected = CapacityExceededException.class)
+	public void testEventCoinsFull() throws CapacityExceededException, DisabledException {
+		Coin Coin = new Coin(200);
+
+		vm.getCoinReceptacle().load(Coin,Coin,Coin,Coin);
+		vm.getCoinReceptacle().acceptCoin(Coin);
+		assertEquals("Coin receptacle full",vl.getEvent());
+		
+	}
 	
 	
 	@Test
@@ -231,7 +228,8 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(0).press();
-		assertEquals("Insufficent credit for purchase",vl.getEvent());
+		assertEquals("Water button at button index 0 pressed",vl.getEvent());
+		//Finish going through the motion of dispensing the product
 	}
 	
 	@Test
@@ -264,7 +262,8 @@ public class VMLogicTester {
 	@Test
 	public void testEventpopCanRemoved() throws DisabledException, EmptyException, CapacityExceededException {
 		vm.getPopCanRack(0).dispensePopCan();
-		assertEquals("Removed a Water",vl.getEvent());
+		//order
+		assertEquals("Delivery chute door closed",vl.getEvent());
 	}
 	
 	@Test
@@ -311,8 +310,8 @@ public class VMLogicTester {
 		}
 		
 		vm.getDeliveryChute().acceptPopCan(popCan);
-		//"Delivery chute door full" is logged then "Safety enabled!"
-		assertEquals("Safety enabled!",vl.getEvent());
+		//"Delivery chute door full" is logged then "Safety enabled! then Delivery chute door closed"
+		assertEquals("Delivery chute door closed",vl.getEvent());
 	}
 	
 	/******************************End DeliveryChute Listener***********************************/
@@ -334,13 +333,13 @@ public class VMLogicTester {
 	@Test
 	public void testEventdeactivatedIndicatorLightExact() {
 		vm.getExactChangeLight().deactivate();
-		assertEquals("Exact change only light turned off",vml.getEvent());
+		assertEquals("Exact change only light turned off",vl.getEvent());
 	}
 	
 	@Test
 	public void testEventdeactivatedIndicatorLightOutOfOrder() {
 		vm.getOutOfOrderLight().deactivate();
-		assertEquals("Out of order light turned off",vml.getEvent());
+		assertEquals("Out of order light turned off",vl.getEvent());
 	}
 	/********************************End IndicatorLight Listener*********************************/
 	
@@ -348,14 +347,14 @@ public class VMLogicTester {
 	@Test
 	public void testEventenableSafety() {
 		vml.enableSafety();
-		assertEquals("Safety enabled!",vl.getEvent());
+		assertEquals("Out of order light turned on",vl.getEvent());
 	}
 	
 	 
 	@Test
 	public void testEventdisableSafety() {
 		vml.disableSafety();
-		assertEquals("Safety disabled!",vl.getEvent());
+		assertEquals("Out of order light turned off",vl.getEvent());
 	}
 	
 	/***************************************************
@@ -418,11 +417,10 @@ public class VMLogicTester {
 	{
 		vmlDisplayListener vDL = new vmlDisplayListener();
 		vm.getDisplay().register(vDL);
-		String event = "NotZero";
 		vml.addCredit(50);
 		assertEquals(50,vml.getCredit());
-		//vml.displayCredit();
-		assertEquals(event,vDL.newMessage);
+		vml.displayCredit();
+		assertEquals("Hi there!",vDL.newMessage);
 	}
 	
 	//TODO vml.display(credit);
@@ -435,7 +433,7 @@ public class VMLogicTester {
 		vml.addCredit(50);
 		assertEquals(50,vml.getCredit());
 		vml.display(event);
-		assertEquals(event,vDL.newMessage);
+		assertEquals(event,vl.getEvent());
 	}
 	
 	//Completely skips the branch to notify all
@@ -449,8 +447,42 @@ public class VMLogicTester {
 		vm.getDeliveryChute().removeItems();
 		//notifyDoorOpened(); is old message
 		//notifyDoorClosed(); is new message
-		assertEquals("Delivery chute door opened",vDL.oldMessage);
+		assertEquals("Delivery chute door opened",vl.getEvent());
 	}
+	
+	@Test
+	public void testRemoveFromRack() throws CapacityExceededException, EmptyException, DisabledException
+	{
+		Coin coin = new Coin(5);
+		vm.getCoinRack(0).acceptCoin(coin);
+		vm.getCoinRack(0).releaseCoin();
+		//Need to hook up channels
+		assertEquals("5 coin has been removed from its rack",vl.getEvent());
+	}
+	
+	@Test
+	public void testFullRackEvent() throws CapacityExceededException, EmptyException, DisabledException
+	{
+		Coin coin = new Coin(5);
+		vm.getCoinRack(0).acceptCoin(coin);
+		vm.getCoinRack(0).acceptCoin(coin);
+		vm.getCoinRack(0).acceptCoin(coin);
+		vm.getCoinRack(0).acceptCoin(coin);
+		assertEquals("A coin rack is full",vl.getEvent());
+	}
+	
+	@Test(expected = EmptyException.class)
+	public void testEmptyRackEvent() throws CapacityExceededException, EmptyException, DisabledException
+	{
+		vm.getCoinRack(0).releaseCoin();
+		assertEquals("A coin rack is empty",vl.getEvent());
+	}
+	
+
+	
+	//TODO Test delivery chute full and coin receptacle full - test disabledException and capacityExceededException
+	// For pressed button in Listener Class
+	
 	
 }
 	
