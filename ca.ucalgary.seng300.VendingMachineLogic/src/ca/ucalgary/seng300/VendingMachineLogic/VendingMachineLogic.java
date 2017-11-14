@@ -79,6 +79,7 @@ public class VendingMachineLogic implements CoinSlotListener, CoinRackListener, 
 	}
 	
 	/*******************************Start CoinSlot Listener*************************************/
+	//When a valid coin is inserted into the vending machine
 	@Override
 	public void validCoinInserted(CoinSlot slot, Coin coin) {
 		addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
