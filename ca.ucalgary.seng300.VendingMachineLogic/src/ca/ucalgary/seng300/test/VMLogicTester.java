@@ -60,7 +60,9 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
+		assertEquals(vml.getCredit(), 400);
 		vm.getSelectionButton(1).press();
+		assertEquals(vm.getDeliveryChute().size(), 1);
 	}
 	
 	//Invalid coin insertion
