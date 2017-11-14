@@ -47,6 +47,12 @@ import org.lsmr.vending.PopCan;
  * Most component devices have some sort of maximum capacity (e.g., of the
  * number of pop cans that can be stored therein). In some cases, this is a
  * simplification of the physical reality for the sake of simulation.
+ * 
+ * <p><h3>HISTORY</h3>
+ * <ul>
+ * <li>2.1: Two bugs in constructor repaired.
+ * <li>2.0: Coin return and configuration panel added.  Overflow coin receptacle removed. Bug in Display repaired.</li>
+ * </ul>
  */
 public final class VendingMachine {
     private boolean safetyOn = false;
@@ -90,10 +96,16 @@ public final class VendingMachine {
      *            be positive.
      * @param receptacleCapacity
      *            The maximum capacity of the coin receptacle. Must be positive.
+     * @param deliveryChuteCapacity
+     *            The maximum capacity of the delivery chute. Must be positive.
+     * @param coinReturnCapacity
+     *            The maximum capacity of the coin return. Must be positive.
+     * 
      * @throws SimulationException
      *             If any of the arguments is null.
      */
-    public VendingMachine(int[] coinKinds, int selectionButtonCount, int coinRackCapacity, int popCanRackCapacity, int receptacleCapacity, int deliveryChuteCapacity, int coinReturnCapacity) {
+    public VendingMachine(int[] coinKinds, int selectionButtonCount, int coinRackCapacity, int popCanRackCapacity, int receptacleCapacity,
+	    int deliveryChuteCapacity, int coinReturnCapacity) {
 	if(coinKinds == null)
 	    throw new SimulationException("Arguments may not be null");
 
@@ -120,7 +132,8 @@ public final class VendingMachine {
 	display = new Display();
 	coinSlot = new CoinSlot(coinKinds);
 	receptacle = new CoinReceptacle(receptacleCapacity);
-	deliveryChute = new DeliveryChute(receptacleCapacity);
+	deliveryChute = new DeliveryChute(deliveryChuteCapacity);
+	coinReturn = new CoinReturn(coinReturnCapacity);
 	coinRacks = new CoinRack[coinKinds.length];
 	coinRackChannels = new HashMap<Integer, CoinChannel>();
 	for(int i = 0; i < coinKinds.length; i++) {

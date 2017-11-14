@@ -1,10 +1,12 @@
 package ca.ucalgary.seng300.VendingMachineLogic;
 
+import java.util.Arrays;
+
 import org.lsmr.vending.Coin;
 import org.lsmr.vending.PopCan;
 import org.lsmr.vending.hardware.*;
 
-public class VendingListener implements CoinSlotListener, CoinRackListener, CoinReceptacleListener, 
+public class VendingListener implements CoinSlotListener, CoinRackListener, CoinReceptacleListener, CoinReturnListener,  
 PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightListener, DisplayListener{
 	
 	private VendingMachineLogic vml;
@@ -29,7 +31,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	@Override
 	public void validCoinInserted(CoinSlot slot, Coin coin) {
 		vml.addCredit(coin.getValue()); //Increment the credit when valid coins are inserted
-		event = ("Inserted " + vml.getCurrency() + " " + coin.getValue() + " cents"); //Updates event for coin insertion
+		event = ("Inserted a " + vml.getCurrency() + coin.getValue() + " cent coin"); //Updates event for coin insertion
 		vml.log(event); //Now logs that event
 		event = "Credit: " + vml.getCredit(); //Updates event for the display
 		vml.display(event); //Displays the current credit for and logs it to file
@@ -81,7 +83,10 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	public void coinAdded(CoinReceptacle receptacle, Coin coin) {}
 
 	@Override
-	public void coinsRemoved(CoinReceptacle receptacle) {}
+	public void coinsRemoved(CoinReceptacle receptacle) {
+		event = "The coin receptacle is emptied";
+		vml.log(event);
+	}
 
 	@Override
 	public void coinsFull(CoinReceptacle receptacle) {
@@ -98,6 +103,20 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	/******************************End CoinReceptacle Listener******************************/
 	
 	
+	/*****************************Start CoinReturn Listener*********************************/
+	@Override
+	public void coinsDelivered(CoinReturn coinReturn, Coin[] coins) {
+		event = Arrays.toString(coins) + " coin(s) delivered to coin return";
+		vml.log(event);
+	}
+
+	@Override
+	public void returnIsFull(CoinReturn coinReturn) {
+		event = "Coin return is full";
+		vml.log(event);
+		vml.enableSafety();
+	}
+	/*****************************End CoinReturn Listener*********************************/
 	/*********************************Start Button Listener*****************************************/
 	
 	/***************************************************
@@ -141,7 +160,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	//Removing PopCan from PopCanRack
 	@Override
 	public void popCanRemoved(PopCanRack popCanRack, PopCan popCan) {
-		event = "Removed a " + popCan.getName();
+		event = "Removed a " + popCan.getName() + "from its rack";
 		vml.log(event);
 	}
 
