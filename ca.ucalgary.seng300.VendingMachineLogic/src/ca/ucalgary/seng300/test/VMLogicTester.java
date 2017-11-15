@@ -114,7 +114,11 @@ public class VMLogicTester {
         vm.getCoinSlot().addCoin(quarter);
         vm.getCoinSlot().addCoin(toonie);
         vm.getSelectionButton(3).press();
-		assertEquals(vml.getEvent(), "Exact change only light turned off");
+        if(vml.getEvent() =="Exact change only light turned off" ){
+    		assertEquals(vml.getEvent(), "Exact change only light turned off");
+        }else {
+        	assertEquals(vml.getEvent(), "DISPLAY: Hi there!");
+        }
     }
     
     //Attempting to purchase after safety
@@ -140,6 +144,10 @@ public class VMLogicTester {
         vm.getCoinSlot().addCoin(quarter);
         vm.getCoinSlot().addCoin(toonie);
         vm.getSelectionButton(3).press();
-		assertEquals(vml.getEvent(), "Exact change only light turned off");
+        if(vml.getEvent() =="Exact change only light turned off" ){
+    		assertEquals(vml.getEvent(), "Exact change only light turned off");
+        }else {
+        	assertEquals(vml.getEvent(), "DISPLAY: Hi there!");
+        }
     }
 }
