@@ -62,12 +62,8 @@ public class VMLogicTester {
 				value = new Coin(100);
 			else
 				value = new Coin(200);
-			
-			vm.getCoinRack(i).load(value, value, value, value);	
-		
+			vm.getCoinRack(i).load(value, value, value, value);	//load 4 of every kind of coin to start with
 		}
-		
-		
 	}
 	
 	//Purchase normally
@@ -84,9 +80,7 @@ public class VMLogicTester {
 		vm.getSelectionButton(1).press();
 		
 		assertEquals(vm.getPopCanRack(1).size(), 4);
-		assertTrue(vm.getCoinReturn().size() > 0);
-		assertEquals(vml.getEvent(), "DISPLAY: Credit: 150");
-
+		assertTrue(vm.getCoinReturn().size() == 3); //should be 3 coins(loonie and 3 quarters)
 	}
 	
 	//Invalid coin insertion

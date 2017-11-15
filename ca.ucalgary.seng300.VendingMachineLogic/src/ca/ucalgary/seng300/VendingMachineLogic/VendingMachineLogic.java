@@ -71,6 +71,7 @@ public class VendingMachineLogic {
 		vm.getCoinSlot().register(vlistener);
 		vm.getDeliveryChute().register(vlistener);
 		vm.getCoinReceptacle().register(vlistener);
+		vm.getCoinReturn().register(vlistener);
 		vm.getOutOfOrderLight().register(vlistener);
 		vm.getExactChangeLight().register(vlistener);
 		

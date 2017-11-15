@@ -89,7 +89,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	 */
 	@Override
 	public void coinRemoved(CoinRack rack, Coin coin) {
-		event = coin.getValue() + "coin has been removed from its rack";
+		event = coin.getValue() + " coin has been removed from its rack";
 		vml.log(event);
 	}
 
@@ -129,7 +129,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	/*****************************Start CoinReturn Listener*********************************/
 	@Override
 	public void coinsDelivered(CoinReturn coinReturn, Coin[] coins) {
-		event = Arrays.toString(coins) + " coin(s) delivered to coin return";
+		event = Arrays.toString(coins) + " cent coin is returned";
 		vml.log(event);
 	}
 
