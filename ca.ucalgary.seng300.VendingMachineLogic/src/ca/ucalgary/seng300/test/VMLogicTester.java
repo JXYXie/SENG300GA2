@@ -72,7 +72,7 @@ public class VMLogicTester {
 		
 }
 	//This test makes sure that valid coins are accepted and added to the vending machine's credit, a pop
-	//is vended when its button is pushed and change is returned
+	//is vended when its button is pushed and change is returned to the user 
 	@Test
 	public void test1() throws DisabledException {
 		Coin toonie = new Coin(200);
@@ -103,6 +103,7 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		
 		vm.getPopCanRack(3).unload();
+		assertEquals(vm.getPopCanRack(3).size(), 0);
 		
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
@@ -112,7 +113,7 @@ public class VMLogicTester {
 		
 	}
 	
-	//Testing for when the coin receptacle becomes full
+	//Testing for when the coin receptacle becomes full. Test should fail if exception is handled correctly
 	@Test
 	public void test4() throws DisabledException, CapacityExceededException {
 		Coin loonie = new Coin(100);		
@@ -128,7 +129,7 @@ public class VMLogicTester {
 		} 
 	}
 	
-	//attempting to purchase with insufficient credits
+	//This test checks that pop is not vended when insufficient credit is in the machine
 	@Test
 	public void test5() throws DisabledException {
 		Coin toonie = new Coin(200);
@@ -137,14 +138,19 @@ public class VMLogicTester {
 		assertEquals(vm.getPopCanRack(3).size(), 5);
 	}
 	
-	//checking to see if change is returned after making a purchase with excess credit
+	//This test makes sure pop is not vended when the machine is disabled, and change is not returned
 	@Test 
-	public void testReturnedChange() throws DisabledException {
+	public void test6() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
-		vm.getSelectionButton(1).press();
-		assertTrue(vm.getCoinReturn().size() > 0);
+		
+		vm.enableSafety();
+		vm.getSelectionButton(4).press();
+		assertEquals(vm.getPopCanRack(4).size(), 5);
+		assertEquals(vm.getCoinReturn().size(), 0);
 	}
+	
+
 	
 }
