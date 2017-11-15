@@ -88,10 +88,7 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
-		vm.getCoinSlot().addCoin(loonie);
+
 	}
 	
 	//attempting to purchase with insufficient credits

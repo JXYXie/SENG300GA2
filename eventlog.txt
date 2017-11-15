@@ -1,0 +1,236 @@
+17:01:05.999 - DISPLAY: Hi there!
+
+17:01:06.001 - Inserted a CAD200 cent coin
+
+17:01:06.002 - DISPLAY: Credit: 200
+
+17:01:06.002 - Inserted a CAD200 cent coin
+
+17:01:06.002 - DISPLAY: Credit: 400
+
+17:01:06.003 - Pepsi button at button index 1 pressed
+
+17:01:06.003 - Removed a Pepsi from its rack
+
+17:01:06.003 - Delivery chute door opened
+
+17:01:06.004 - Delivery chute door closed
+
+17:01:06.004 - Delivered [Pepsi]
+
+17:01:06.005 - 200 cent coin has been added to its rack
+
+17:01:06.005 - 200 cent coin has been added to its rack
+
+17:01:06.005 - The coin receptacle is emptied
+
+17:01:06.006 - Exact change only light turned on
+
+17:01:06.006 - DISPLAY: Credit: 150
+
+17:01:06.008 - Invalid coin inserted
+
+17:01:06.010 - DISPLAY: Hi there!
+
+17:01:06.010 - Inserted a CAD200 cent coin
+
+17:01:06.011 - DISPLAY: Credit: 200
+
+17:01:06.011 - Inserted a CAD200 cent coin
+
+17:01:06.012 - DISPLAY: Credit: 400
+
+17:01:06.012 - Mountain Dew button at button index 3 pressed
+
+17:01:06.012 - DISPLAY: Mountain Dew is sold out!
+
+17:01:06.013 - DISPLAY: Hi there!
+
+17:01:06.014 - Inserted a CAD100 cent coin
+
+17:01:06.014 - DISPLAY: Credit: 100
+
+17:01:06.014 - Inserted a CAD100 cent coin
+
+17:01:06.014 - DISPLAY: Credit: 200
+
+17:01:06.015 - Inserted a CAD100 cent coin
+
+17:01:06.015 - DISPLAY: Credit: 300
+
+17:01:06.015 - Coin receptacle full
+
+17:01:06.015 - DISPLAY: Hi there!
+
+17:01:06.016 - Out of order light turned on
+
+17:01:06.016 - Safety enabled!
+
+17:01:06.016 - Inserted a CAD100 cent coin
+
+17:01:06.016 - DISPLAY: Credit: 400
+
+17:01:06.026 - Inserted a CAD200 cent coin
+
+17:01:06.026 - DISPLAY: Hi there!
+
+17:01:06.026 - DISPLAY: Credit: 200
+
+17:01:06.027 - Mountain Dew button at button index 3 pressed
+
+17:01:06.027 - DISPLAY: Insufficient credit: 50 cents short
+
+17:01:06.028 - DISPLAY: Hi there!
+
+17:01:06.028 - Inserted a CAD25 cent coin
+
+17:01:06.028 - DISPLAY: Credit: 25
+
+17:01:06.028 - Inserted a CAD25 cent coin
+
+17:01:06.029 - DISPLAY: Credit: 50
+
+17:01:06.029 - Inserted a CAD200 cent coin
+
+17:01:06.029 - DISPLAY: Credit: 250
+
+17:01:06.029 - Mountain Dew button at button index 3 pressed
+
+17:01:06.030 - Removed a Mountain Dew from its rack
+
+17:01:06.030 - Delivery chute door opened
+
+17:01:06.030 - Delivery chute door closed
+
+17:01:06.030 - Delivered [Mountain Dew]
+
+17:01:06.030 - 25 cent coin has been added to its rack
+
+17:01:06.031 - 25 cent coin has been added to its rack
+
+17:01:06.031 - 200 cent coin has been added to its rack
+
+17:01:06.031 - The coin receptacle is emptied
+
+17:01:06.031 - Exact change only light turned off
+
+17:01:06.034 - DISPLAY: Hi there!
+
+17:01:27.623 - DISPLAY: Hi there!
+
+17:01:27.625 - Inserted a CAD200 cent coin
+
+17:01:27.626 - DISPLAY: Credit: 200
+
+17:01:27.626 - Inserted a CAD200 cent coin
+
+17:01:27.626 - DISPLAY: Credit: 400
+
+17:01:27.627 - Pepsi button at button index 1 pressed
+
+17:01:27.627 - Removed a Pepsi from its rack
+
+17:01:27.628 - Delivery chute door opened
+
+17:01:27.628 - Delivery chute door closed
+
+17:01:27.628 - Delivered [Pepsi]
+
+17:01:27.629 - 200 cent coin has been added to its rack
+
+17:01:27.629 - 200 cent coin has been added to its rack
+
+17:01:27.630 - The coin receptacle is emptied
+
+17:01:27.630 - Exact change only light turned on
+
+17:01:27.630 - DISPLAY: Credit: 150
+
+17:01:27.632 - Invalid coin inserted
+
+17:01:27.633 - DISPLAY: Hi there!
+
+17:01:27.635 - Inserted a CAD200 cent coin
+
+17:01:27.635 - DISPLAY: Credit: 200
+
+17:01:27.636 - Inserted a CAD200 cent coin
+
+17:01:27.636 - DISPLAY: Hi there!
+
+17:01:27.636 - DISPLAY: Credit: 400
+
+17:01:27.636 - Mountain Dew button at button index 3 pressed
+
+17:01:27.636 - DISPLAY: Mountain Dew is sold out!
+
+17:01:27.638 - DISPLAY: Hi there!
+
+17:01:27.638 - Inserted a CAD100 cent coin
+
+17:01:27.639 - DISPLAY: Credit: 100
+
+17:01:27.639 - Inserted a CAD100 cent coin
+
+17:01:27.639 - DISPLAY: Credit: 200
+
+17:01:27.639 - Inserted a CAD100 cent coin
+
+17:01:27.640 - DISPLAY: Credit: 300
+
+17:01:27.640 - Coin receptacle full
+
+17:01:27.640 - Out of order light turned on
+
+17:01:27.641 - Safety enabled!
+
+17:01:27.641 - Inserted a CAD100 cent coin
+
+17:01:27.641 - DISPLAY: Credit: 400
+
+17:01:27.642 - Inserted a CAD200 cent coin
+
+17:01:27.642 - DISPLAY: Hi there!
+
+17:01:27.643 - DISPLAY: Credit: 200
+
+17:01:27.643 - Mountain Dew button at button index 3 pressed
+
+17:01:27.643 - DISPLAY: Insufficient credit: 50 cents short
+
+17:01:27.644 - DISPLAY: Hi there!
+
+17:01:27.644 - Inserted a CAD25 cent coin
+
+17:01:27.645 - DISPLAY: Credit: 25
+
+17:01:27.645 - Inserted a CAD25 cent coin
+
+17:01:27.645 - DISPLAY: Credit: 50
+
+17:01:27.645 - Inserted a CAD200 cent coin
+
+17:01:27.645 - DISPLAY: Credit: 250
+
+17:01:27.646 - Mountain Dew button at button index 3 pressed
+
+17:01:27.646 - Removed a Mountain Dew from its rack
+
+17:01:27.646 - Delivery chute door opened
+
+17:01:27.646 - Delivery chute door closed
+
+17:01:27.647 - Delivered [Mountain Dew]
+
+17:01:27.647 - 25 cent coin has been added to its rack
+
+17:01:27.647 - 25 cent coin has been added to its rack
+
+17:01:27.647 - 200 cent coin has been added to its rack
+
+17:01:27.648 - The coin receptacle is emptied
+
+17:01:27.648 - Exact change only light turned off
+
+17:01:27.648 - DISPLAY: Hi there!
+
