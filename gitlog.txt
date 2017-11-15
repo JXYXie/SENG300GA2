@@ -1,0 +1,290 @@
+commit 677afb9047bf47312a0b56a091da8781fce12b6a
+Author: Jack Xie<jacktuffx@gmail.com>
+Date:   Tue Nov 14 14:23:48 2017 -0700
+
+    Updated hardware files to version 2.1 and changed VendingMachineLogic and VendingListener to support the new hardware
+
+commit fb33b330f2dfebd13dff7c831a08a6d8a010c535
+Author: Jack Xie<jacktuffx@gmail.com>
+Date:   Tue Nov 14 05:21:12 2017 -0700
+
+    Final changes to make files easier to debug
+
+commit ab2980f40cee83f16880ec90c21de4a4e6194e09
+Author: Jack Xie<jacktuffx@gmail.com>
+Date:   Tue Nov 14 00:33:10 2017 -0700
+
+    Made changes to and fixed change behaviour
+
+commit 7d6d7750b63c3376f50dd9d52e3d648a0f2f9f57
+Merge: 3740d18 85c1395
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Tue Nov 14 00:13:13 2017 -0700
+
+    Merge pull request #9 from JXYXie/change
+    
+    Change
+
+commit 85c1395a15acc190d0e71c80389fd75b0644e815
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Tue Nov 14 00:10:18 2017 -0700
+
+    Add files via upload
+
+commit 3740d18558ba017b0d47da3a8854d9c09c77bf9b
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Tue Nov 14 00:04:39 2017 -0700
+
+    Delete VendingMachineLogic.java
+
+commit 8ec3d075881f889821f9e1c3dc0892bea10b2d48
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Tue Nov 14 00:02:23 2017 -0700
+
+    Add files via upload
+
+commit 53330a053fad96105cf7636886ccc15adfa0aed9
+Merge: a2da057 2017b35
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Tue Nov 14 00:01:10 2017 -0700
+
+    Merge pull request #8 from JXYXie/change
+    
+    Change
+
+commit a2da057b56ffcf20f98729b76297de5cad16c915
+Merge: 095ad69 5624328
+Author: Jack <jacktuffx@gmail.com>
+Date:   Mon Nov 13 23:59:53 2017 -0700
+
+    Merge branch 'master' of https://github.com/JXYXie/SENG300GA2
+
+commit 095ad69d2bbad40c0da65658ef76500166dda9bf
+Author: Jack <jacktuffx@gmail.com>
+Date:   Mon Nov 13 23:59:51 2017 -0700
+
+    Updated listener methods
+
+commit 2017b351483e8ad04c6c74dd9f02513b7899630c
+Merge: 2b2dac8 5624328
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Mon Nov 13 23:58:51 2017 -0700
+
+    Merge pull request #7 from JXYXie/master
+    
+    VendingMachineLogic now also contains task 5 and 6
+
+commit 2b2dac87948023a79a71f430ecf811fd768489fb
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Mon Nov 13 23:57:22 2017 -0700
+
+    Add files via upload
+    
+    Includes task 5 and 6
+
+commit 5624328d1a727bddf9a6371f48108c7bc2f90f37
+Merge: d37e383 14a6715
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Mon Nov 13 23:44:14 2017 -0700
+
+    Merge pull request #6 from JXYXie/change
+    
+    Add files via upload
+
+commit 14a67156c3b9f7d2d7b2ff87eb38aefa1318a1ba
+Author: SidKataria <32744185+SidKataria@users.noreply.github.com>
+Date:   Mon Nov 13 23:43:49 2017 -0700
+
+    Add files via upload
+    
+    VendingMachineLogic class with giveChange() method
+
+commit d37e38394a4d20bef239aaba3f6df0b0ece4455f
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 23:08:10 2017 -0700
+
+    minor changes
+
+commit b8bd73959bbfbd0dd360ad975d6ad81bc20f65ff
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 23:02:33 2017 -0700
+
+    more coverage
+    
+    more coverage
+
+commit 410371be62941ebdc75340cdcd5c8ea0d3ccacc4
+Merge: 7d9741d 278c68f
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Mon Nov 13 23:00:17 2017 -0700
+
+    Merge pull request #5 from espectro93/patch-1
+    
+    Update VendingMachineLogic.java
+
+commit 278c68fd108a172027dfebb2353177dfcd5027de
+Author: espectro93 <Gerdes.Steffen@googlemail.com>
+Date:   Mon Nov 13 22:59:11 2017 -0700
+
+    Update VendingMachineLogic.java
+    
+    Delivery chute opened by customer simulation, triggers door opened event
+
+commit 7d9741d32efa4e09ebec40d985f1241010d95516
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 22:49:57 2017 -0700
+
+    my testfile ATM. (incomplete)
+    
+    still working on it
+
+commit f9f4660b2a9d88850182302b28b693699118bb86
+Merge: 60a3b15 932866c
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 22:30:45 2017 -0700
+
+    Merge branch 'master' of https://github.com/JXYXie/SENG300GA2
+
+commit 60a3b15e8ce9bac78af03652777c21dd782d1476
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 22:29:07 2017 -0700
+
+    more commenting
+    
+    commenting
+
+commit 399c9067b19780888a5bdc2818bd8408d9be5142
+Author: JackyJWu <jackyjwu86@gmail.com>
+Date:   Mon Nov 13 22:27:05 2017 -0700
+
+    commenting stuff
+
+commit 932866c21f20d37743ccbca3ea0eb126cc31fa68
+Merge: bc50337 d81fdf2
+Author: Jack <jacktuffx@gmail.com>
+Date:   Mon Nov 13 22:25:57 2017 -0700
+
+    Merge pull request #4 from JXYXie/active
+    
+    Active Merge
+
+commit bc50337893cca6e9fd1959222c3d77947133cffb
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 17:03:19 2017 -0700
+
+    Updated proper project paths
+
+commit d81fdf2cdcb55d63fe969512a23bcdcf59c862f6
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 17:02:51 2017 -0700
+
+    Updated proper project paths
+
+commit 0a3510ad8a70bf2f66f58ba8e49f335fc69d3c72
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 16:13:17 2017 -0700
+
+    Fixed date not updating due to improper instantiation
+
+commit cb5c17cd6e6aa4e4a687ad6772f803017f8eff69
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 16:12:10 2017 -0700
+
+    Added in timer support (need serious testing)
+
+commit 081c5499d0690971560268b4f6329050a360c3bf
+Merge: cef650b 1dc9789
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 15:42:34 2017 -0700
+
+    Merge pull request #2 from sarafrancium/patch-1
+    
+    fixed copy paste typo on line 270
+
+commit 1dc978930ca1c6a9690d35583d6bbe5c4f443cf7
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Sun Nov 12 15:41:15 2017 -0700
+
+    fixed copy paste typo on line 270
+
+commit 110f42bd4c90ed183d2f6d56af933e097a3f071c
+Merge: 8d960c3 cef650b
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 13:40:27 2017 -0700
+
+    Merge pull request #1 from JXYXie/master
+    
+    Small changes to display messages
+
+commit cef650b26a7dd7f8156c3afcc85082037c7f6a2a
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 13:38:04 2017 -0700
+
+    Small changes to display messages
+
+commit 8d960c37c4d7f112e967b80d770d4e1f718c40f3
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 02:03:42 2017 -0700
+
+    Fixed few bugs
+
+commit ef83325e618605c48f60107f0f71cc2db1fbbc00
+Author: Jack <jacktuffx@gmail.com>
+Date:   Sun Nov 12 01:28:04 2017 -0700
+
+    Added event file logging and display messages
+
+commit 7254c29a704d944951194e353c87af3eba967521
+Author: Jack <jacktuffx@gmail.com>
+Date:   Fri Nov 10 22:35:00 2017 -0700
+
+    Updated readme to reflect changes
+
+commit 04a0f2aaad01b74d68b53ddb6366511d2af362a1
+Author: Jack <jacktuffx@gmail.com>
+Date:   Fri Nov 10 22:32:36 2017 -0700
+
+    Updated logic class
+    
+     - Added support for additional listeners (Not yet fully implemented)
+     - Partially implemented displaying messages
+
+commit b639b4d3db090081329ef4a35f36d25a7a52e376
+Author: Jack <jacktuffx@gmail.com>
+Date:   Fri Nov 10 22:01:24 2017 -0700
+
+    Fixed some formatting
+
+commit 69f66086170476f8618cf0247f33081de24dc9fd
+Author: Jack <jacktuffx@gmail.com>
+Date:   Wed Nov 8 19:38:43 2017 -0700
+
+    Zip file containing the updated hardware
+
+commit f2d41ba656bb467515550c15ff60e7a03220102d
+Author: Jack <jacktuffx@gmail.com>
+Date:   Wed Nov 8 19:09:57 2017 -0700
+
+    Add files via upload
+    
+    Added initial java project with source files from modified group assignment 1
+
+commit d6fa9458075b32f3ba436ff1369d7e529633e5cf
+Author: Jack <jacktuffx@gmail.com>
+Date:   Wed Nov 8 16:32:41 2017 -0700
+
+    Update README.md
+    
+    Formatting
+
+commit 0192fee0ee04c200d0540eeab13ea6bebf92cc65
+Author: Jack <jacktuffx@gmail.com>
+Date:   Wed Nov 8 16:29:18 2017 -0700
+
+    Update README.md
+
+commit 04357accd8485b7905060cdee426bd16539dc63c
+Author: Jack <jacktuffx@gmail.com>
+Date:   Wed Nov 8 16:26:40 2017 -0700
+
+    Initial commit
