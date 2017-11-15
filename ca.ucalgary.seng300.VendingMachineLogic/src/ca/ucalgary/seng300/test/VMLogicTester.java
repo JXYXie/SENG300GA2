@@ -3,10 +3,7 @@ package ca.ucalgary.seng300.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +22,7 @@ public class VMLogicTester {
 		
 		int[] coinKinds = {5, 10, 25, 100, 200}; //Nickels, dimes, quarters, loonies, toonies (all values in cents)
 		int btnCount = 6; //6 types of pop
-		int coinRackCapacity = 15;
+		int coinRackCapacity = 4;
 		int popRackCapacity = 10;
 		int receptacleCapacity = 4;
 		int deliveryChuteCapacity = 10;
@@ -51,58 +48,25 @@ public class VMLogicTester {
 		
 		vm.configure(popNames, costs);
 		vm.loadPopCans(5, 5, 5, 5, 5, 5); //Starts with 5 of each kind of pop
-		
-		//load the coin racks 
-		for(int i = 0; i < vm.getNumberOfCoinRacks(); i++) {
-			Coin value;
-			if (i == 0) 
-				value = new Coin(5);
-			else if (i == 1)
-				value = new Coin(10);
-			else if (i == 2)
-				value = new Coin(25);
-			else if (i == 3)
-				value = new Coin(100);
-			else
-				value = new Coin(200);
-			
-			vm.getCoinRack(i).load(value, value, value, value);	
-		
 	}
-		
-}
-	//This test makes sure that valid coins are accepted and added to the vending machine's credit, a pop
-	//is vended when its button is pushed and change is returned to the user 
+	
+	//Purchase normally
 	@Test
 	public void test1() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
-		assertEquals(vml.getCredit(), 400);
-		assertEquals(vm.getPopCanRack(1).size(), 5);
 		vm.getSelectionButton(1).press();
-<<<<<<< HEAD
 		assertEquals(vml.getEvent(), "DISPLAY: Credit: 150");
 
-=======
-		assertEquals(vm.getPopCanRack(1).size(), 4);
-		assertTrue(vm.getCoinReturn().size() > 0);
-	
->>>>>>> test_changes
 	}
 	
-	//This test makes sure that invalid coins are not added to the vending machine's credit 
-	//and are instead sent to the coin return 
+	//Invalid coin insertion
 	@Test
 	public void test2() throws Exception {
 		Coin fiver = new Coin(500);
 		vm.getCoinSlot().addCoin(fiver);
-<<<<<<< HEAD
 		assertEquals(vml.getEvent(), "Invalid coin inserted");
-=======
-		assertEquals(vml.getCredit(), 0);
-		assertTrue(vm.getCoinReturn().size() > 0);
->>>>>>> test_changes
 	}
 	
 	//Test to check when you attempt to purchase a something that is not in stock
@@ -112,22 +76,16 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		
 		vm.getPopCanRack(3).unload();
-		assertEquals(vm.getPopCanRack(3).size(), 0);
 		
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
 		
 		vm.getSelectionButton(3).press();
-<<<<<<< HEAD
 		
 		assertEquals(vml.getEvent(), "DISPLAY: Mountain Dew is sold out!");
-=======
-		assertEquals(vml.getEvent(), "DISPLAY: Mountain Dew is sold out!");
-		
->>>>>>> test_changes
 	}
 	
-	//Testing for when the coin receptacle becomes full. Test should fail if exception is handled correctly
+	//Testing for when the coin receptacle becomes full
 	@Test
 	public void test4() throws DisabledException, CapacityExceededException {
 		Coin loonie = new Coin(100);		
@@ -135,26 +93,16 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
-<<<<<<< HEAD
 		assertEquals(vml.getEvent(), "DISPLAY: Credit: 400");
 
-=======
-		try {
-			vm.getCoinSlot().addCoin(loonie);
-		}
-		catch (DisabledException e){
-			fail("purposely failed test to make sure catch block ran");
-		} 
->>>>>>> test_changes
 	}
 	
-	//This test checks that pop is not vended when insufficient credit is in the machine
+	//attempting to purchase with insufficient credits
 	@Test
 	public void test5() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
-<<<<<<< HEAD
 		assertEquals(vml.getEvent(), "DISPLAY: Insufficient credit: 50 cents short");
 	}
     //paying exact price with no change return
@@ -202,24 +150,4 @@ public class VMLogicTester {
         	assertEquals(vml.getEvent(), "DISPLAY: Hi there!");
         }
     }
-=======
-		assertEquals(vm.getPopCanRack(3).size(), 5);
-	}
-	
-	//This test makes sure pop is not vended when the machine is disabled, and change is not returned
-	@Test 
-	public void test6() throws DisabledException {
-		Coin toonie = new Coin(200);
-		vm.getCoinSlot().addCoin(toonie);
-		vm.getCoinSlot().addCoin(toonie);
-		
-		vm.enableSafety();
-		vm.getSelectionButton(4).press();
-		assertEquals(vm.getPopCanRack(4).size(), 5);
-		assertEquals(vm.getCoinReturn().size(), 0);
-	}
-	
-
-	
->>>>>>> test_changes
 }
