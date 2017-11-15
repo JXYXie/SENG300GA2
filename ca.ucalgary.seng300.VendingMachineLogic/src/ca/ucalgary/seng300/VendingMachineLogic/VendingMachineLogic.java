@@ -226,5 +226,14 @@ public class VendingMachineLogic {
 	public List<PushButton> getButtonList() {
 		return buttonList;
 	}
+	
+	/**
+	 * @return VendingListener (for unit testing)
+	 */
+	
+	public VendingListener getListener()
+	{
+		return vlistener;
+	}
 
 }
