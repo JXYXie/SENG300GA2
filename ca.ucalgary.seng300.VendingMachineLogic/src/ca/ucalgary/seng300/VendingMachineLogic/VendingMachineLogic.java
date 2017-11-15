@@ -193,7 +193,7 @@ public class VendingMachineLogic {
 	 * Useful for printing things to a log file or do display
 	 */
 	public String getEvent() {
-		return event;
+		return vlistener.getEvent();
 	}
 	
 	public void log(String line) {
@@ -227,13 +227,6 @@ public class VendingMachineLogic {
 		return buttonList;
 	}
 	
-	/**
-	 * @return VendingListener (for unit testing)
-	 */
 	
-	public VendingListener getListener()
-	{
-		return vlistener;
-	}
 
 }
