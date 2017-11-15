@@ -71,26 +71,29 @@ public class VMLogicTester {
 	}
 		
 }
-	//Purchase normally
+	//This test makes sure that valid coins are accepted and added to the vending machine's credit, a pop
+	//is vended when its button is pushed and change is returned
 	@Test
 	public void test1() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
 		assertEquals(vml.getCredit(), 400);
+		assertEquals(vm.getPopCanRack(1).size(), 5);
 		vm.getSelectionButton(1).press();
-		System.out.println(vml.getEvent());
-		assertEquals(vml.getEvent(), "Delivery chute door opened");
-	//	assertEquals(vm.getDeliveryChute().size(), 1);
+		assertEquals(vm.getPopCanRack(1).size(), 4);
+		assertTrue(vm.getCoinReturn().size() > 0);
 	
 	}
 	
-	//Invalid coin insertion
+	//This test makes sure that invalid coins are not added to the vending machine's credit 
+	//and are instead sent to the coin return 
 	@Test
 	public void test2() throws Exception {
 		Coin fiver = new Coin(500);
 		vm.getCoinSlot().addCoin(fiver);
 		assertEquals(vml.getCredit(), 0);
+		assertTrue(vm.getCoinReturn().size() > 0);
 	}
 	
 	//Test to check when you attempt to purchase a something that is not in stock
@@ -105,7 +108,8 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(toonie);
 		
 		vm.getSelectionButton(3).press();
-		assertEquals(vm.getDeliveryChute().size(), 0);
+		assertEquals(vml.getEvent(), "DISPLAY: Mountain Dew is sold out!");
+		
 	}
 	
 	//Testing for when the coin receptacle becomes full
@@ -116,7 +120,6 @@ public class VMLogicTester {
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
 		vm.getCoinSlot().addCoin(loonie);
-		assertTrue(!(vm.getCoinReceptacle().hasSpace()));
 		try {
 			vm.getCoinSlot().addCoin(loonie);
 		}
@@ -131,7 +134,7 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
-		assertEquals(vm.getDeliveryChute().size(), 0);
+		assertEquals(vm.getPopCanRack(3).size(), 5);
 	}
 	
 	//checking to see if change is returned after making a purchase with excess credit
