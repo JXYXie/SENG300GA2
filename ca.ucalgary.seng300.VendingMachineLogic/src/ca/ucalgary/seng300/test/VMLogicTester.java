@@ -140,7 +140,7 @@ public class VMLogicTester {
 	
 	//This test makes sure pop is not vended when the machine is disabled, and change is not returned
 	@Test 
-	public void test6() throws DisabledException {
+	public void test7() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
