@@ -1,3 +1,21 @@
+commit 2b9f4c0c7489487440cb68d41c52630392eff191
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Wed Nov 15 00:58:56 2017 -0700
+
+    Fixed grammar mistake, changed conclusion sentence a bit, added indent to paragraph and changed the font
+
+commit 1222a19334b90f5df9eb77ba7cc214e21ee45c6d
+Author: JaskaranSidhu <32685059+JaskaranSidhu@users.noreply.github.com>
+Date:   Wed Nov 15 00:50:10 2017 -0700
+
+    Add files via upload
+
+commit df0dc695d005632c97d869c933e898c181ec82a7
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Wed Nov 15 00:45:18 2017 -0700
+
+    Updated git log file
+
 commit d96a25c815903f093ca3e504a7f32477843f43c8
 Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 15 00:36:36 2017 -0700
