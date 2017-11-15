@@ -1,17 +1,236 @@
+commit d96a25c815903f093ca3e504a7f32477843f43c8
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Wed Nov 15 00:36:36 2017 -0700
+
+    Updated readme for to reflect final changes
+
+commit 952bb287b7ad71850525a8cb4baf7b6b3c3e8fbf
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Wed Nov 15 00:31:36 2017 -0700
+
+    Reduced code overlap in test cases and increased code coverage and path coverage
+    
+    Removed 2 redundant test cases
+    And merged one of the removed ones with an existing test case
+    Added additional testing to a test case to gain further code and path coverage
+
+commit 8d026c95d0a9fb48a1ddc09cfa152355d7a47438
+Merge: 53cc130 65b2d06
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 22:58:27 2017 -0700
+
+    Merge branch 'master' of https://github.com/JXYXie/SENG300GA2
+
+commit 53cc13023e6aeb21c18b8c41f7506057782b8b1a
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 22:57:39 2017 -0700
+
+    Fixed some final bugs and updated testing file
+    
+    Registered coinslot listener (forgot before)
+    So now all the messages that should be logged are logged
+    Changed test1 to reflect this
+
+commit 65b2d066dcee818c3f35e2ff34fa7efdb40f40c0
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 22:53:24 2017 -0700
+
+    commented out line 88 so that test 1 passes (read comments on this commit for explanations)
+    
+    i'm really tired and not sure if we should remove that line OR remove the lines 52-68 that load coins which would then require the removal of line 87 (for the test to pass) and line 173 (because it becomes redundant) and then change comments on lines 163 and line 75. i'm officially too tired to make decisions so i'm going home lol. i like the loading coins code and i think it adds a lot to the tests to know that change is returned but i leave this in y'alls capable hands
+
+commit 24af5b14f5af309018049ffacaab5de2c13f9b18
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 22:11:10 2017 -0700
+
+    added stuff from my tests to jacky's tests
+    
+    should be all good now. i also changed the coinRackCapacity to 15 which shouldn't mess anything up
+
+commit 59618dc93d55cd914dd1aadf9e2dcd8b36e19126
+Merge: 6a0594f 74df120
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 21:48:09 2017 -0700
+
+    Merge pull request #12 from JXYXie/test_changes
+    
+    Update VMLogicTester.java
+
+commit 74df1206cd6119f81f5032daffe100e0f387e74b
+Merge: 0cf1b2c 6a0594f
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 21:43:38 2017 -0700
+
+    Merge branch 'master' into test_changes
+
+commit 0cf1b2ce37268bb5a9a46d5b3934dc13bd08e040
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 21:27:19 2017 -0700
+
+    Update VMLogicTester.java
+
+commit 6a0594fd26830ae1b88b640a24146ad06c1b7b22
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 19:40:29 2017 -0700
+
+    Revert "Merge branch 'test_changes'"
+    
+    This reverts commit dca62f9fa2d4bd5b96513a34c89cc1109cc18fd9, reversing
+    changes made to 38bc50516fffa310aa834453eb9b7e44b5edbd3f.
+
+commit dca62f9fa2d4bd5b96513a34c89cc1109cc18fd9
+Merge: 38bc505 cff8c7c
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 19:38:18 2017 -0700
+
+    Merge branch 'test_changes'
+
+commit cff8c7cae81e42337a8ce9026dd313374b51bd6b
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 18:45:02 2017 -0700
+
+    changed some tests, added a test
+
+commit 38bc50516fffa310aa834453eb9b7e44b5edbd3f
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 18:27:48 2017 -0700
+
+    Added asserts to test file
+
+commit 4f48e2724fef0d5d1962bc9e18cc2b52b36d2c0e
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 18:21:03 2017 -0700
+
+    Changed test file
+
+commit 129ba0fbf399c7409970a9390fa2dd0186119989
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 17:18:13 2017 -0700
+
+    Added additional test cases to test file
+
+commit f880be120dcf9180af99a2bda532902af1c53d44
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 17:11:39 2017 -0700
+
+    Added more test cases
+
+commit 23c7d76a1e55574450132fa611b8c5dc067393e6
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 17:02:07 2017 -0700
+
+    Changed test file
+    
+    removed few lines
+
+commit 1d4a7b31ae532d12f88703c5c729a36351a79d34
+Author: Steffen <sg@thepeaklab.com>
+Date:   Tue Nov 14 16:52:36 2017 -0700
+
+    Added diagrams + diagram justification
+
+commit 70a14e9559d251be90a790d96b86320b1b37c8bd
+Author: Jacky <jackyjwu86@gmail.com>
+Date:   Tue Nov 14 16:46:18 2017 -0700
+
+    Added new test cases
+
+commit fff080bdb0790e662db4608bd9ea5ff64fde9dc3
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 16:56:37 2017 -0700
+
+    Added final documentations and fixed a typo
+
+commit 5b80809767cdcff00fcdd09640f3b6abceaabc72
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 16:17:18 2017 -0700
+
+    Updated hardware 2.1 classpaths
+
+commit 57ad1b1f42d89b16375e4dc8fbb91aeb10fa8d67
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 16:16:24 2017 -0700
+
+    Updated logic and listener classes for better compatability with testing
+    
+    - Event handling is altered slightly to better update string event
+    - Outputed more detailed information when pop is vended
+
+commit 0f7eddab4b98d493a65c51e96a6db08b6550e0be
+Author: Jack Xie <jacktuffx@gmail.com>
+Date:   Tue Nov 14 14:39:43 2017 -0700
+
+    Added gitlog history file
+
+commit 2b04dc9f781202647ab03b9fbcbedba629f40782
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 18:30:09 2017 -0700
+
+    fixed tests, added comments
+
+commit 256af9d0e0842152eccacfb023ac70bb1541b284
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 18:14:14 2017 -0700
+
+    updated test file
+
+commit 3353754d4f414c623a5e1eb5a46db9d7c3d3b62d
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 15:14:59 2017 -0700
+
+    changed some of the tests
+    
+    added assertions to tests and changed test 4 so that it purposely fails instead of throwing an error
+
+commit 23d4ea73e6844d56eb18f7544704d5ea764c23eb
+Author: sarafrancium <32684939+sarafrancium@users.noreply.github.com>
+Date:   Tue Nov 14 14:59:55 2017 -0700
+
+    changed test1()
+    
+    added assertions to test1(), the second assertion fails the test - the pop was not delivered to the delivery chute
+
+commit 8d5ada4b3d08ddecf70785aa6b23dfbc179f9c3b
+Author: sjbirchl <sjbirchl@ucalgary.ca>
+Date:   Tue Nov 14 14:53:35 2017 -0700
+
+    Made some more changes
+
+commit ad35ef531e6a3403efaebda2ae7c5df02b4b3c99
+Author: sjbirchl <sjbirchl@ucalgary.ca>
+Date:   Tue Nov 14 14:41:15 2017 -0700
+
+    Have almost all the tests down need to add tests for - Test delivery
+    chute full and coin receptacle full - test disabledException and
+    capacityExceededExceptionFor pressed button in Listener Class
+
 commit 677afb9047bf47312a0b56a091da8781fce12b6a
-Author: Jack Xie<jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Tue Nov 14 14:23:48 2017 -0700
 
     Updated hardware files to version 2.1 and changed VendingMachineLogic and VendingListener to support the new hardware
 
+commit 99ada02ec69ece348b3a52e48ccfcb2e18e531c9
+Author: sjbirchl <sjbirchl@ucalgary.ca>
+Date:   Tue Nov 14 13:24:10 2017 -0700
+
+    Added Unit tests to VMLogicTester, modified  logic and listener classes
+    to make testing easier
+
+commit db5d4c1c44d683070e84a101947e2a1226b262ca
+Author: sjbirchl <sjbirchl@ucalgary.ca>
+Date:   Tue Nov 14 13:23:23 2017 -0700
+
+    Added Unit tests to VM Logic Tester - need to checkout another branch
+
 commit fb33b330f2dfebd13dff7c831a08a6d8a010c535
-Author: Jack Xie<jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Tue Nov 14 05:21:12 2017 -0700
 
     Final changes to make files easier to debug
 
 commit ab2980f40cee83f16880ec90c21de4a4e6194e09
-Author: Jack Xie<jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Tue Nov 14 00:33:10 2017 -0700
 
     Made changes to and fixed change behaviour
@@ -54,13 +273,13 @@ Date:   Tue Nov 14 00:01:10 2017 -0700
 
 commit a2da057b56ffcf20f98729b76297de5cad16c915
 Merge: 095ad69 5624328
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Mon Nov 13 23:59:53 2017 -0700
 
     Merge branch 'master' of https://github.com/JXYXie/SENG300GA2
 
 commit 095ad69d2bbad40c0da65658ef76500166dda9bf
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Mon Nov 13 23:59:51 2017 -0700
 
     Updated listener methods
@@ -161,7 +380,7 @@ Date:   Mon Nov 13 22:27:05 2017 -0700
 
 commit 932866c21f20d37743ccbca3ea0eb126cc31fa68
 Merge: bc50337 d81fdf2
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Mon Nov 13 22:25:57 2017 -0700
 
     Merge pull request #4 from JXYXie/active
@@ -169,32 +388,32 @@ Date:   Mon Nov 13 22:25:57 2017 -0700
     Active Merge
 
 commit bc50337893cca6e9fd1959222c3d77947133cffb
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 17:03:19 2017 -0700
 
     Updated proper project paths
 
 commit d81fdf2cdcb55d63fe969512a23bcdcf59c862f6
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 17:02:51 2017 -0700
 
     Updated proper project paths
 
 commit 0a3510ad8a70bf2f66f58ba8e49f335fc69d3c72
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 16:13:17 2017 -0700
 
     Fixed date not updating due to improper instantiation
 
 commit cb5c17cd6e6aa4e4a687ad6772f803017f8eff69
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 16:12:10 2017 -0700
 
     Added in timer support (need serious testing)
 
 commit 081c5499d0690971560268b4f6329050a360c3bf
 Merge: cef650b 1dc9789
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 15:42:34 2017 -0700
 
     Merge pull request #2 from sarafrancium/patch-1
@@ -209,7 +428,7 @@ Date:   Sun Nov 12 15:41:15 2017 -0700
 
 commit 110f42bd4c90ed183d2f6d56af933e097a3f071c
 Merge: 8d960c3 cef650b
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 13:40:27 2017 -0700
 
     Merge pull request #1 from JXYXie/master
@@ -217,31 +436,31 @@ Date:   Sun Nov 12 13:40:27 2017 -0700
     Small changes to display messages
 
 commit cef650b26a7dd7f8156c3afcc85082037c7f6a2a
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 13:38:04 2017 -0700
 
     Small changes to display messages
 
 commit 8d960c37c4d7f112e967b80d770d4e1f718c40f3
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 02:03:42 2017 -0700
 
     Fixed few bugs
 
 commit ef83325e618605c48f60107f0f71cc2db1fbbc00
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Sun Nov 12 01:28:04 2017 -0700
 
     Added event file logging and display messages
 
 commit 7254c29a704d944951194e353c87af3eba967521
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Fri Nov 10 22:35:00 2017 -0700
 
     Updated readme to reflect changes
 
 commit 04a0f2aaad01b74d68b53ddb6366511d2af362a1
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Fri Nov 10 22:32:36 2017 -0700
 
     Updated logic class
@@ -250,19 +469,19 @@ Date:   Fri Nov 10 22:32:36 2017 -0700
      - Partially implemented displaying messages
 
 commit b639b4d3db090081329ef4a35f36d25a7a52e376
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Fri Nov 10 22:01:24 2017 -0700
 
     Fixed some formatting
 
 commit 69f66086170476f8618cf0247f33081de24dc9fd
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 8 19:38:43 2017 -0700
 
     Zip file containing the updated hardware
 
 commit f2d41ba656bb467515550c15ff60e7a03220102d
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 8 19:09:57 2017 -0700
 
     Add files via upload
@@ -270,7 +489,7 @@ Date:   Wed Nov 8 19:09:57 2017 -0700
     Added initial java project with source files from modified group assignment 1
 
 commit d6fa9458075b32f3ba436ff1369d7e529633e5cf
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 8 16:32:41 2017 -0700
 
     Update README.md
@@ -278,13 +497,13 @@ Date:   Wed Nov 8 16:32:41 2017 -0700
     Formatting
 
 commit 0192fee0ee04c200d0540eeab13ea6bebf92cc65
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 8 16:29:18 2017 -0700
 
     Update README.md
 
 commit 04357accd8485b7905060cdee426bd16539dc63c
-Author: Jack <jacktuffx@gmail.com>
+Author: Jack Xie <jacktuffx@gmail.com>
 Date:   Wed Nov 8 16:26:40 2017 -0700
 
     Initial commit
