@@ -182,7 +182,7 @@ public class VendingMachineLogic {
 	/**
 	 * Enables the safety of the vending machine
 	 */
-	void enableSafety() {
+	public void enableSafety() {
 		vm.enableSafety();
 		event = "Safety enabled!";
 		log(event);
@@ -191,7 +191,7 @@ public class VendingMachineLogic {
 	/**
 	 * Disables the safety of the vending machine
 	 */
-	void disableSafety() {
+	public void disableSafety() {
 		vm.disableSafety();
 		event = "Safety disabled!";
 		log(event);

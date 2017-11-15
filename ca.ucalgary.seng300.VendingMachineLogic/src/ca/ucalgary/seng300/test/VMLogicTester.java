@@ -109,4 +109,27 @@ public class VMLogicTester {
         vm.getSelectionButton(3).press();
     }
     
+    //Attempting to purchase after safety
+    @Test
+    public void test7() throws DisabledException {
+    	vml.enableSafety();
+        Coin toonie = new Coin(200);
+        Coin quarter = new Coin(25);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(toonie);
+        vm.getSelectionButton(3).press();
+    }
+    //Enabling
+    @Test
+    public void test8() throws DisabledException {
+    	vml.enableSafety();
+    	vml.disableSafety();
+        Coin toonie = new Coin(200);
+        Coin quarter = new Coin(25);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(quarter);
+        vm.getCoinSlot().addCoin(toonie);
+        vm.getSelectionButton(3).press();
+    }
 }
