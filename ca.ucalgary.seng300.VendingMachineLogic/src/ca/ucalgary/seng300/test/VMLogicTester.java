@@ -103,8 +103,10 @@ public class VMLogicTester {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getSelectionButton(3).press();
+		assertEquals(vm.getPopCanRack(3).size(), 5);
 		assertEquals(vml.getEvent(), "DISPLAY: Insufficient credit: 50 cents short");
 	}
+	
     //paying exact price with no change return
     @Test
     public void test6() throws DisabledException {
@@ -121,18 +123,19 @@ public class VMLogicTester {
         }
     }
     
-    //Attempting to purchase after safety
-    @Test
-    public void test7() throws DisabledException {
-    	vml.enableSafety();
-        Coin toonie = new Coin(200);
-        Coin quarter = new Coin(25);
-		assertEquals(vml.getEvent(), "Safety enabled!");
-//        vm.getCoinSlot().addCoin(quarter);
-//        vm.getCoinSlot().addCoin(quarter);
-//        vm.getCoinSlot().addCoin(toonie);
-//        vm.getSelectionButton(3).press();
-    }
+	//This test makes sure pop is not vended when the machine is disabled, and change is not returned
+	@Test 
+	public void test7() throws DisabledException {
+		Coin toonie = new Coin(200);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getCoinSlot().addCoin(toonie);
+		
+		vm.enableSafety();
+		vm.getSelectionButton(4).press();
+		assertEquals(vm.getPopCanRack(4).size(), 5);
+		assertEquals(vm.getCoinReturn().size(), 0);
+	}
+	
     //Enabling and the disabling safety
     @Test
     public void test8() throws DisabledException {
