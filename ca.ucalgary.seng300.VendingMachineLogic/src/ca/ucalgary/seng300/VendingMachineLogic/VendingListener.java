@@ -51,7 +51,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	//Rejects an invalid coin
 	@Override
 	public void coinRejected(CoinSlot slot, Coin coin) {
-		event = "Invalid coin inserted";
+		event = "Invalid " + coin.getValue() + " cent coin inserted";
 		vml.log(event);
 	}
 	/*******************************End CoinSlot Listener*************************************/
@@ -104,18 +104,25 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	/******************************Start CoinReceptacle Listener******************************/
 	@Override
 	public void coinAdded(CoinReceptacle receptacle, Coin coin) {}
-
+	
+	/**
+	 * event when the coin receptacle is emptied
+	 */
 	@Override
 	public void coinsRemoved(CoinReceptacle receptacle) {
 		event = "The coin receptacle is emptied";
 		vml.log(event);
 	}
-
+	
+	/**
+	 * event when the coin receptacle is full
+	 * enables the safety
+	 */
 	@Override
 	public void coinsFull(CoinReceptacle receptacle) {
 		event = "Coin receptacle full";
 		vml.log(event);
-		vml.enableSafety();
+		vml.enableSafety(); //enable the safety
 	}
 
 	@Override
@@ -145,6 +152,7 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 	/*********************************Start Button Listener*****************************************/
 	/***************************************************
 	 * Handles the logic of push buttons
+	 * If a valid button is pressed, then the buy method in vending machine logic is called
 	 **************************************************/
 	@Override
 	public void pressed(PushButton button) {
@@ -168,6 +176,17 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 				vml.display(event);
 				vml.enableSafety();
 			} catch (EmptyException e) { //Or pop is sold out
+				try {
+					vml.returnChange(); //still tries to return the change
+				} catch (DisabledException e1) {
+					event = "The vending machine is currently disabled!";
+					vml.display(event);
+					vml.enableSafety();
+				} catch (CapacityExceededException e1) {
+					e1.printStackTrace();
+				} catch (EmptyException e1) {
+					e1.printStackTrace();
+				};
 				event = vm.getPopKindName(btnIndex)+ " is sold out!";
 				vml.display(event);
 			}
@@ -196,14 +215,21 @@ PushButtonListener, PopCanRackListener, DeliveryChuteListener, IndicatorLightLis
 
 	@Override
 	public void popCansUnloaded(PopCanRack rack, PopCan... popCans) {}
-
+	
+	/**
+	 * When a pop can rack is full
+	 * enables safety
+	 */
 	@Override
 	public void popCansFull(PopCanRack popCanRack) {
 		event = "Pop can rack full";
 		vml.log(event);
 		vml.enableSafety();
 	}
-
+	
+	/**
+	 * When a pop can rack becomes empty
+	 */
 	@Override
 	public void popCansEmpty(PopCanRack popCanRack) {
 		event = "Pop can rack empty";

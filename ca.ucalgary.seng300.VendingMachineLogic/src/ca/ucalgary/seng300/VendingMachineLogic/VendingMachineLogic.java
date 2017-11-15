@@ -28,9 +28,10 @@ import org.lsmr.vending.hardware.*;
 
 public class VendingMachineLogic {
 
-	private VendingMachine vm;
-	private VendingListener vlistener;
+	private VendingMachine vm; //Vending machine object
+	private VendingListener vlistener; //listener objecy
 	
+	//fields for the message looping
 	private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	private ScheduledFuture<?> beeperHandle;
 	private EventLogger logger;
@@ -51,8 +52,9 @@ public class VendingMachineLogic {
 		vlistener = new VendingListener(vm, this);
 		logger = new EventLogger();
 		
+		//Iterate through all buttons
 		for (int i = 0; i < vm.getNumberOfSelectionButtons(); i++) {
-			PushButton sb = vm.getSelectionButton(i); //Instantiates the hardware
+			PushButton sb = vm.getSelectionButton(i); //Instantiates the button
 			sb.register(vlistener); //And registers the relevant listeners
 			buttonList.add(sb); //Stores into an ArrayList for later use
 		}
@@ -74,6 +76,7 @@ public class VendingMachineLogic {
 		vm.getCoinReturn().register(vlistener);
 		vm.getOutOfOrderLight().register(vlistener);
 		vm.getExactChangeLight().register(vlistener);
+		vm.getDisplay().register(vlistener);
 		
 		userCredit = 0;
 		displayCredit(); //Display looping message at beginning since credit is 0
@@ -129,8 +132,8 @@ public class VendingMachineLogic {
 		
 		if (userCredit != 0) { //if there is still money left in the vending machine that means there is not enough change for the user
 			vm.getExactChangeLight().activate();
-		} else {
-			vm.getExactChangeLight().deactivate();
+		} else if (userCredit == 0 && vm.getExactChangeLight().isActive()) { //if the exact change light is already turned on
+			vm.getExactChangeLight().deactivate(); //turn it off
 		}
 		
 	}

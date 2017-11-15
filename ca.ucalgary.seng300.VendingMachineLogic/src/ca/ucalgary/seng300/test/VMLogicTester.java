@@ -90,9 +90,8 @@ public class VMLogicTester {
 	public void test2() throws Exception {
 		Coin fiver = new Coin(500);
 		vm.getCoinSlot().addCoin(fiver);
-		assertEquals(vml.getEvent(), "Invalid coin inserted");
-		assertEquals(vml.getCredit(), 0);
-		assertTrue(vm.getCoinReturn().size() > 0);
+		vm.getSelectionButton(1).press();
+		assertTrue(vm.getCoinReturn().size() > 0); //the invalid coin should still be returned
 	}
 	
 	//Test to check when you attempt to purchase a something that is not in stock
@@ -101,7 +100,7 @@ public class VMLogicTester {
 		
 		Coin toonie = new Coin(200);
 		
-		vm.getPopCanRack(3).unload();
+		vm.getPopCanRack(3).unload(); //first unload all the mountain dew (index 3)
 		
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
@@ -123,7 +122,6 @@ public class VMLogicTester {
 			vm.getCoinSlot().addCoin(loonie);
 		}
 		finally {
-			
 		}
 	}
 	
@@ -137,51 +135,33 @@ public class VMLogicTester {
 		assertEquals(vm.getPopCanRack(3).size(), 5);
 		assertEquals(vml.getEvent(), "DISPLAY: Insufficient credit: 50 cents short");
 	}
-	
-    //paying exact price with no change return
-    @Test
-    public void test6() throws DisabledException {
-        Coin toonie = new Coin(200);
-        Coin quarter = new Coin(25);
-        vm.getCoinSlot().addCoin(quarter);
-        vm.getCoinSlot().addCoin(quarter);
-        vm.getCoinSlot().addCoin(toonie);
-        vm.getSelectionButton(3).press();
-        if(vml.getEvent() =="Exact change only light turned off" ){
-    		assertEquals(vml.getEvent(), "Exact change only light turned off");
-        }else {
-        	assertEquals(vml.getEvent(), "DISPLAY: Hi there!");
-        }
-    }
-    
+	    
 	//This test makes sure pop is not vended when the machine is disabled, and change is not returned
+	//but once safety is disabled, meaning machine is enabled again, vending machine should be operable again
+	//Also tests when there is no more exact change
 	@Test 
-	public void test7() throws DisabledException {
+	public void test6() throws DisabledException {
 		Coin toonie = new Coin(200);
 		vm.getCoinSlot().addCoin(toonie);
 		vm.getCoinSlot().addCoin(toonie);
 		
-		vm.enableSafety();
+		vm.enableSafety(); //safety is enabled
 		vm.getSelectionButton(4).press();
 		assertEquals(vm.getPopCanRack(4).size(), 5);
 		assertEquals(vm.getCoinReturn().size(), 0);
+		
+		vm.disableSafety(); //safety is disabled
+		vm.getSelectionButton(4).press();
+		
+		for (int i = 0; i < vm.getNumberOfCoinRacks(); i ++ ) {
+			vm.getCoinRack(i).unload(); //unload all the coins for testing purposes
+		}
+		
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getCoinSlot().addCoin(toonie);
+		vm.getSelectionButton(5).press();
+		
+		assertEquals(vm.getExactChangeLight().isActive(), true); //the exact change light should be on now
+		assertEquals(vml.getCredit(), 150); //and the remaining credit is still saved
 	}
-	
-    //Enabling and the disabling safety
-    @Test
-    public void test8() throws DisabledException {
-    	vml.enableSafety();
-    	vml.disableSafety();
-        Coin toonie = new Coin(200);
-        Coin quarter = new Coin(25);
-        vm.getCoinSlot().addCoin(quarter);
-        vm.getCoinSlot().addCoin(quarter);
-        vm.getCoinSlot().addCoin(toonie);
-        vm.getSelectionButton(3).press();
-        if(vml.getEvent() =="Exact change only light turned off" ){
-    		assertEquals(vml.getEvent(), "Exact change only light turned off");
-        }else {
-        	assertEquals(vml.getEvent(), "DISPLAY: Hi there!");
-        }
-    }
 }
