@@ -110,7 +110,7 @@ public class VMLogicTester {
     }
     
     //Attempting to purchase after safety
-    @Test
+    @Test (expected = DisabledException.class)
     public void test7() throws DisabledException {
     	vml.enableSafety();
         Coin toonie = new Coin(200);
@@ -120,7 +120,7 @@ public class VMLogicTester {
         vm.getCoinSlot().addCoin(toonie);
         vm.getSelectionButton(3).press();
     }
-    //Enabling
+    //Enabling and the disabling safety
     @Test
     public void test8() throws DisabledException {
     	vml.enableSafety();
