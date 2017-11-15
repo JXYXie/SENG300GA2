@@ -404,11 +404,11 @@ public class VMLogicTester {
 	{
 		vmlDisplayListener vDL = new vmlDisplayListener();
 		vm.getDisplay().register(vDL);
-		String event = "NotZero";
+		String event = "Credit: 50";
 		vml.addCredit(50);
 		assertEquals(50,vml.getCredit());
 		vml.displayCredit();
-		assertEquals(event,vDL.oldMessage);
+		assertEquals(event,vDL.newMessage);
 	}
 	
 	//TODO vml.display(credit);
@@ -447,17 +447,34 @@ public class VMLogicTester {
 		vm.getDeliveryChute().removeItems();
 		//notifyDoorOpened(); is old message
 		//notifyDoorClosed(); is new message
-		assertEquals("Delivery chute door opened",vl.getEvent());
+		assertEquals("Delivery chute door closed",vl.getEvent());
 	}
 	
+	private static class AlwaysAcceptsStub implements CoinAcceptor {
+		
+
+		@Override
+		public boolean hasSpace() {
+		    return true;
+		}
+
+		@Override
+		public void acceptCoin(Coin coin) throws CapacityExceededException, DisabledException {
+		    //Do nothing
+		}
+	    }
 	@Test
 	public void testRemoveFromRack() throws CapacityExceededException, EmptyException, DisabledException
 	{
 		Coin coin = new Coin(5);
+		AlwaysAcceptsStub aas = new AlwaysAcceptsStub();
+		vm.getCoinRack(0).connect(new CoinChannel(aas));
+		vm.getCoinRack(0).acceptCoin(coin);
 		vm.getCoinRack(0).acceptCoin(coin);
 		vm.getCoinRack(0).releaseCoin();
-		//Need to hook up channels
-		assertEquals("5 coin has been removed from its rack",vl.getEvent());
+		
+		
+		assertEquals("5coin has been removed from its rack",vl.getEvent());
 	}
 	
 	@Test
@@ -471,9 +488,13 @@ public class VMLogicTester {
 		assertEquals("A coin rack is full",vl.getEvent());
 	}
 	
-	@Test(expected = EmptyException.class)
+	@Test
 	public void testEmptyRackEvent() throws CapacityExceededException, EmptyException, DisabledException
 	{
+		
+		AlwaysAcceptsStub aas = new AlwaysAcceptsStub();
+		vm.getCoinRack(0).connect(new CoinChannel(aas));
+		vm.getCoinRack(0).acceptCoin(new Coin(5));
 		vm.getCoinRack(0).releaseCoin();
 		assertEquals("A coin rack is empty",vl.getEvent());
 	}
@@ -484,6 +505,119 @@ public class VMLogicTester {
 	// For pressed button in Listener Class
 	
 	
+	
+	static class LyingStub implements CoinAcceptor {
+		
+
+		@Override
+		public boolean hasSpace() {
+		    return true;
+		}
+
+		@Override
+		public void acceptCoin(Coin coin) throws CapacityExceededException, DisabledException {
+		    
+		    throw new CapacityExceededException();
+		}
+	}
+	static class DisabledStub implements CoinAcceptor
+	{
+
+		@Override
+		public void acceptCoin(Coin coin) throws CapacityExceededException, DisabledException {
+			throw new DisabledException();
+			
+		}
+
+		@Override
+		public boolean hasSpace() {
+			
+			return true;
+		}
+		
+	}
+    
+    
+    @Test
+    public void testEventReceptacleCapacity()
+    {
+    	LyingStub valid = new LyingStub();
+    	AlwaysAcceptsStub invalid = new AlwaysAcceptsStub();
+    	vm.getCoinSlot().connect(new CoinChannel(valid), new CoinChannel(invalid));
+    	try {
+			vm.getCoinReceptacle().acceptCoin(new Coin(5));
+			
+		} catch (DisabledException e) {
+			
+		} catch (CapacityExceededException e) {
+		
+		}finally
+    	{
+			assertEquals("Coin receptacle full",vl.getEvent());
+		}
+    	
+    	
+    }
+    
+    @Test
+    public void testEventReceptacleDisabled()
+    {
+    	DisabledStub valid = new DisabledStub();
+    	AlwaysAcceptsStub invalid = new AlwaysAcceptsStub();
+    	vm.getCoinSlot().connect(new CoinChannel(valid), new CoinChannel(invalid));
+    	try {
+			vm.getCoinSlot().addCoin(new Coin(5));
+		} catch (DisabledException e) {
+			
+		}finally
+    	{
+			assertEquals("Out of order light turned on",vl.getEvent());
+		}
+    	
+    	
+    }
+    
+    private static class LyingPopCanAcceptor implements PopCanAcceptor
+    {
+
+		@Override
+		public void acceptPopCan(PopCan popCan) throws CapacityExceededException, DisabledException {
+			throw new CapacityExceededException();
+			
+		}
+
+		@Override
+		public boolean hasSpace() {
+			
+			return true;
+		}
+    	
+    }
+    
+    @Test
+    public void testEventChuteFull()
+    {
+    	LyingPopCanAcceptor lpca = new LyingPopCanAcceptor();
+    
+    	
+    	vm.getPopCanRack(0).connect(new PopCanChannel(lpca));
+    	try {
+			vm.getDeliveryChute().acceptPopCan(new PopCan("Water"));
+		} catch (CapacityExceededException e) {
+			
+			
+		} catch (DisabledException e) {
+			
+		}
+    	
+    	assertEquals("The delivery chute is full!",vl.getEvent());
+    	
+    	
+    }
+    
+    
 }
+	
+
 	
 
